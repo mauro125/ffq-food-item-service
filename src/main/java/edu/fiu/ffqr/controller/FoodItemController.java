@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import edu.fiu.ffqr.calculator.FFQCalculator;
-import edu.fiu.ffqr.models.FFQResult;
+import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.FoodItemInput;
 import edu.fiu.ffqr.models.NutrientList;
 import edu.fiu.ffqr.service.FFQFoodEntryService;
 import edu.fiu.ffqr.service.NutrientListService;
+import edu.fiu.ffqr.service.ResultsService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,16 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class FoodItemController {
+  
   @Autowired
   private FFQFoodEntryService foodItemService;
+  
   @Autowired
   private NutrientListService foodTypeService;
+  
+  //dariana
+  @Autowired
+  private ResultsService resultsService;
   
   public FoodItemController() {}
   
@@ -189,9 +196,17 @@ public class FoodItemController {
   	  return "Deleted " + name;
   }
   
-  @PostMapping("/calculate") 
-  public FFQResult calculateTotals(@RequestBody ArrayList<FoodItemInput> userChoices) {
-	  return FFQCalculator.calculateTotals(userChoices, foodTypeService);
+  /*
+   * Author: Dariana Gonzalez
+   * Modified (09/2019) to receive questionnaireId as parameter and save the results in the DB
+   */
+  @PostMapping("/calculate/{questionnaireId}") 
+  public Result calculateTotals(@PathVariable("questionnaireId") String questionnaireId, @RequestBody ArrayList<FoodItemInput> userChoices) {
+	  
+	  Result result = FFQCalculator.calculateTotals(questionnaireId, userChoices, foodTypeService);
+	  resultsService.create(result);
+	  
+	  return result;
   }
   
 }
