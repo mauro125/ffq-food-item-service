@@ -15,6 +15,7 @@ import edu.fiu.ffqr.calculator.FFQCalculator;
 import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.FoodItemInput;
+import edu.fiu.ffqr.models.FoodNutrients;
 import edu.fiu.ffqr.models.NutrientList;
 import edu.fiu.ffqr.service.FFQFoodEntryService;
 import edu.fiu.ffqr.service.NutrientListService;
@@ -32,13 +33,42 @@ public class FoodItemController {
   private FFQFoodEntryService foodItemService;
   
   @Autowired
+  private NutrientListService nutrientListService;
+  
+  @Autowired
   private NutrientListService foodTypeService;
   
-  //dariana
+  //Added: Dariana Gonzalez
   @Autowired
   private ResultsService resultsService;
   
   public FoodItemController() {}
+  
+  @GetMapping("/allfoodsnutrients")
+  public List<FoodNutrients> allFoods() throws JsonProcessingException {
+	  
+	  List<FoodNutrients> listFoodsNutrients = new ArrayList<>();
+	  
+	  List<FoodItem> foods = foodItemService.getAll();
+	  
+	  for(FoodItem food : foods) {
+		  NutrientList nutrientList = new NutrientList();
+		  nutrientList = nutrientListService.getWithNutrientListID(food.getNutrientId());
+		  FoodNutrients foodNutrients = new FoodNutrients(food, nutrientList);
+		  listFoodsNutrients.add(foodNutrients);
+	  }
+	  
+	  return listFoodsNutrients;
+  }  
+  
+  @PostMapping("/createfoodnutrients")
+  public FoodNutrients createFoodNutrients(@RequestBody FoodNutrients foodNutrients) throws JsonProcessingException {
+	  
+	  foodItemService.create(foodNutrients.getFoodItem());
+	  nutrientListService.create(foodNutrients.getNutrientList());
+	  
+	  return foodNutrients;
+  }
   
   @GetMapping("/fooditems")
   public List<FoodItem> getAllFoods() throws JsonProcessingException {

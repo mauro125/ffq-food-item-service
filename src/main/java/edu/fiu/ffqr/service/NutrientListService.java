@@ -1,5 +1,6 @@
 package edu.fiu.ffqr.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,7 +8,6 @@ import org.apache.poi.util.ArrayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.NutrientList;
 import edu.fiu.ffqr.models.ValidNutrientList;
@@ -22,6 +22,14 @@ public class NutrientListService {
 	public NutrientList getWithNutrientListID(String nutrientListID) {
 		return nutrientListRepository.findByNutrientListID(nutrientListID);
 	}
+	
+	
+	
+	//Dariana
+	public NutrientList update(NutrientList updatedNutrientList) {
+		
+		return nutrientListRepository.save(updatedNutrientList);
+	}	
 	
 	public List<NutrientList> getAll() {
 		return nutrientListRepository.findAll();
@@ -43,6 +51,7 @@ public class NutrientListService {
         }
 		
 		return nutrientListRepository.save(newNutrientList);
+		
 	}
 	
 	public void delete(String nutrientListID) {

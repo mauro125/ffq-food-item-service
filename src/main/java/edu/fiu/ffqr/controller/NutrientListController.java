@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,13 @@ public class NutrientListController {
 	  
     public NutrientListController() {}
 	  
+    //dariana
+    @PutMapping("")
+	public NutrientList saveNutrientLists(@RequestBody NutrientList newNutrientList) throws JsonProcessingException {
+		return nutrientListService.update(newNutrientList);
+		
+	}
+    
 	@GetMapping("/nutrientlists")
 	public List<NutrientList> getAllNutrientLists() throws JsonProcessingException {
 		List<NutrientList> foods = nutrientListService.getAll();

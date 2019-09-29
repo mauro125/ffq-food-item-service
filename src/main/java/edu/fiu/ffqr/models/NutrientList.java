@@ -1,20 +1,18 @@
 package edu.fiu.ffqr.models;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(collection = "nutrient_lists")
 public class NutrientList {
+	
 	@Id
-	private ObjectId id;
-	@JsonProperty("nutrientListID")
+    private ObjectId id;
+	@JsonProperty("nutrientListID")	
 	private String nutrientListID;
 	@JsonProperty("nutrientMap")
 	Map <String,Double> nutrientMap = new HashMap<String,Double>();	
@@ -34,8 +32,8 @@ public class NutrientList {
 		this.nutrientMap = nutrientMap;
 	}
 
-	public ObjectId getId() {
-		return id;
+	public String getId() {
+		return id.toHexString();
 	}
 
 	public void setId(ObjectId id) {

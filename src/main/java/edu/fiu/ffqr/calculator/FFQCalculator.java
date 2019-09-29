@@ -13,7 +13,7 @@ import edu.fiu.ffqr.service.NutrientListService;
 public class FFQCalculator {
 	
 	public static Result calculateTotals(String questionnaireId, ArrayList<FoodItemInput> userChoices, NutrientListService nlService) {
-		//hola
+		
 		//get list of valid nutrients
 		String[] nutrients = ValidNutrientList.validNutrients;
 

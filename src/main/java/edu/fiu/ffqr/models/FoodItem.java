@@ -1,24 +1,21 @@
 package edu.fiu.ffqr.models;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(collection="food_items")
-public class FoodItem implements Serializable {
-	
+public class FoodItem implements Serializable {	
+ 
   @Id
-  @JsonProperty("id")
-  private ObjectId id;
+  private ObjectId id;  
   @JsonProperty("name")
   private String name;
   @Field("servings")
-  private ArrayList<ServingOptions> servingsList;
+  private ArrayList<ServingOptions> servingsList;  
   @Field("foodTypes")
   private ArrayList<FoodType> foodTypes;
   @JsonProperty("sugar")
@@ -117,8 +114,8 @@ public class FoodItem implements Serializable {
     return this.name; 
   }
 
-  public ObjectId getId() { 
-	return id;
+  public String getId() { 
+	return id.toHexString();
   }
   
   public void setId(ObjectId id) {
@@ -141,6 +138,10 @@ public class FoodItem implements Serializable {
     return this.foodTypes;
   }
   
+  public String getNutrientId() {
+	    return this.foodTypes.get(0).getNutrientListID();
+	  }
+  
   public void setFoodTypes(ArrayList<FoodType> foodTypes) {
     this.foodTypes = foodTypes;
   }
@@ -160,6 +161,4 @@ public class FoodItem implements Serializable {
   public void setPrimary(boolean primary) {
 	this.primary = primary;
   }
-
-  
 }
