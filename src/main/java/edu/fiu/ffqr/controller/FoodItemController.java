@@ -24,6 +24,7 @@ import edu.fiu.ffqr.service.ResultsService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -60,6 +61,19 @@ public class FoodItemController {
 	  
 	  return listFoodsNutrients;
   }  
+  
+  @GetMapping("/foodNutrients/{name}")
+  public FoodNutrients getfoodNutrients(@PathVariable("name") String name) throws JsonProcessingException {
+	  
+	  FoodItem foodItem = new FoodItem();	  
+	  NutrientList nutrientList = new NutrientList();	
+	  
+	  foodItem = foodItemService.getEntryWithName(name);	  
+	  nutrientList = nutrientListService.getWithNutrientListID(foodItem.getNutrientId());	  
+	  FoodNutrients foodNutrients = new FoodNutrients(foodItem, nutrientList);	
+	  
+	  return foodNutrients;
+  } 
   
   @PostMapping("/createfoodnutrients")
   public FoodNutrients createFoodNutrients(@RequestBody FoodNutrients foodNutrients) throws JsonProcessingException {
