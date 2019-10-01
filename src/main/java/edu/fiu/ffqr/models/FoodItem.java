@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class FoodItem implements Serializable {	
  
   @Id
-  private ObjectId id;  
+  private ObjectId _id;  
   @JsonProperty("name")
   private String name;
   @Field("servings")
@@ -27,7 +27,7 @@ public class FoodItem implements Serializable {
   public FoodItem() {}
   
   public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes) {
-    this.id = new ObjectId();
+    this._id = new ObjectId();
     this.name = name;
     this.servingsList = servings;
     this.foodTypes = foodTypes;
@@ -35,7 +35,7 @@ public class FoodItem implements Serializable {
   } 
   
   public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, boolean primary) {
-	this.id = new ObjectId();
+	this._id = new ObjectId();
     this.name = name;
     this.servingsList = servings;
 	this.foodTypes = foodTypes;
@@ -43,7 +43,7 @@ public class FoodItem implements Serializable {
   }
 
   public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, SugarSetting addSugar) {
-	this.id = new ObjectId();
+	this._id = new ObjectId();
 	this.name = name;
 	this.servingsList = servings;
 	this.foodTypes = foodTypes;
@@ -51,8 +51,8 @@ public class FoodItem implements Serializable {
 	this.primary = false;
   }
   
-  public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, SugarSetting addSugar, boolean primary) {
-    this.id = new ObjectId();
+  public FoodItem(ObjectId id, String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, SugarSetting addSugar, boolean primary) {
+    this._id = id;
     this.name = name;
 	this.servingsList = servings;
 	this.foodTypes = foodTypes;
@@ -61,7 +61,7 @@ public class FoodItem implements Serializable {
   }
 
   public FoodItem(String name, ArrayList<FoodType> foodTypes, SugarSetting addSugar) {
-	this.id = new ObjectId();
+	this._id = new ObjectId();
 	this.name = name;
 	this.foodTypes = foodTypes;
 	this.additionalSugar = addSugar;
@@ -74,7 +74,7 @@ public class FoodItem implements Serializable {
   } 
   
   public FoodItem(String name, ArrayList<FoodType> foodTypes, SugarSetting addSugar, boolean primary) {
-	this.id = new ObjectId();
+	this._id = new ObjectId();
 	this.name = name;
 	this.foodTypes = foodTypes;
 	this.additionalSugar = addSugar;
@@ -87,7 +87,7 @@ public class FoodItem implements Serializable {
   }
 
   public FoodItem(String name, ArrayList<FoodType> foodTypes) {
-	this.id = new ObjectId();
+	this._id = new ObjectId();
 	this.name = name;
 	this.foodTypes = foodTypes;
 	this.primary = false;	
@@ -99,7 +99,7 @@ public class FoodItem implements Serializable {
   }
   
   public FoodItem(String name, ArrayList<FoodType> foodTypes, boolean primary) {
-	this.id = new ObjectId();
+	this._id = new ObjectId();
 	this.name = name;
 	this.foodTypes = foodTypes;
 	this.primary = true;	
@@ -115,11 +115,11 @@ public class FoodItem implements Serializable {
   }
 
   public String getId() { 
-	return id.toHexString();
+	return _id.toHexString();
   }
   
   public void setId(ObjectId id) {
-	this.id = id;
+	this._id = id;
   }
   
   public void setName(String name) { 

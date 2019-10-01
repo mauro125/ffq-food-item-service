@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,12 @@ public class FFQFoodEntryService {
 		return foodRepository.findByName(name);
 	}
 	
+	public FoodItem getFoodItemBy_id(ObjectId _id) {
+		return foodRepository.getFoodItemBy_id(_id);
+	}
+	
 	public FoodItem getEntryWithNutrientListID(String nutrientListID) {
-		return foodRepository.findByNutrientListID(nutrientListID);
+		return foodRepository.findByNutrientId(nutrientListID);
 	}
 	
 	public FoodItem create(FoodItem fi) {

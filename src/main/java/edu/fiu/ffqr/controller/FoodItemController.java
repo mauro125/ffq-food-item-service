@@ -1,5 +1,6 @@
 package edu.fiu.ffqr.controller;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,18 +63,18 @@ public class FoodItemController {
 	  return listFoodsNutrients;
   }  
   
-  @GetMapping("/foodNutrients/{name}")
-  public FoodNutrients getfoodNutrients(@PathVariable("name") String name) throws JsonProcessingException {
+  @GetMapping("/foodNutrients/{foodItemId}")
+  public FoodNutrients getFoodNutrients(@PathVariable("foodItemId") ObjectId id) throws JsonProcessingException {
 	  
 	  FoodItem foodItem = new FoodItem();	  
 	  NutrientList nutrientList = new NutrientList();	
 	  
-	  foodItem = foodItemService.getEntryWithName(name);	  
-	  nutrientList = nutrientListService.getWithNutrientListID(foodItem.getNutrientId());	  
+	  foodItem = foodItemService.getFoodItemBy_id(id);	  
+	  nutrientList = nutrientListService.getWithNutrientListID(foodItem.getFoodTypes().get(0).getNutrientListID());	  
 	  FoodNutrients foodNutrients = new FoodNutrients(foodItem, nutrientList);	
 	  
 	  return foodNutrients;
-  } 
+  }
   
   @PostMapping("/createfoodnutrients")
   public FoodNutrients createFoodNutrients(@RequestBody FoodNutrients foodNutrients) throws JsonProcessingException {
