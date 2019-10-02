@@ -63,7 +63,7 @@ public class FoodItemController {
 	  return listFoodsNutrients;
   }  
   
-  @GetMapping("/foodNutrients/{foodItemId}")
+  @GetMapping("/foodnutrients/{foodItemId}")
   public FoodNutrients getFoodNutrients(@PathVariable("foodItemId") ObjectId id) throws JsonProcessingException {
 	  
 	  FoodItem foodItem = new FoodItem();	  
