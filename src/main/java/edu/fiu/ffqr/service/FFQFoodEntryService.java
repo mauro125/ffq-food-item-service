@@ -67,6 +67,9 @@ public class FFQFoodEntryService {
 		foodRepository.delete(fi);
 	}
 
-	
+	public void deleteById(ObjectId id) {
+		FoodItem fi = foodRepository.getFoodItemBy_id(id);
+		foodRepository.delete(fi);
+	}
 	
 }

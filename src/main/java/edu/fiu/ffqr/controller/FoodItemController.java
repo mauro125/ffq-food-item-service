@@ -221,29 +221,34 @@ public class FoodItemController {
 	  return data;
   }
   
+  /*
+   * Modified by Dariana Gonzalez (10/2019) to delete by ObjectId
+   */
   @DeleteMapping("/delete")
-  public String delete(@RequestParam String name) {
-	  //find nutrientListID for this food item
-	  FoodItem target = foodItemService.getEntryWithName(name);
-	  ArrayList<String> nutrientListIDS = new ArrayList<String>();
+  public String delete(@RequestParam ObjectId id) {
 	  
-	  for (int i = 0; i < target.getFoodTypes().size(); i++) {
-		  nutrientListIDS.add(target.getFoodTypes().get(i).getNutrientListID());
+	  FoodItem foodItem = new FoodItem();	  
+	  ArrayList<String> nutrientListIds = new ArrayList<String>();
+	  
+	  foodItem = foodItemService.getFoodItemBy_id(id);
+	  
+	  for (int i = 0; i < foodItem.getFoodTypes().size(); i++) {
+		  nutrientListIds.add(foodItem.getFoodTypes().get(i).getNutrientListID());
 	  }
 	  
-	  //delete these nutrientListIDS in nutrientList collection
-	  for (int i = 0; i < nutrientListIDS.size(); i++) {
-		  NutrientList nl = foodTypeService.getWithNutrientListID(nutrientListIDS.get(i));
+	  //delete these nutrientListIds in nutrient_lists collection
+	  for (int i = 0; i < nutrientListIds.size(); i++) {
+		  NutrientList nl = foodTypeService.getWithNutrientListID(nutrientListIds.get(i));
 		  foodTypeService.delete(nl.getNutrientListID());
 	  }
 	  
-	  foodItemService.delete(name);
-  	  return "Deleted " + name;
+	  //delete the food item from the food_items collection
+	  foodItemService.deleteById(id);
+  	  return "Deleted " + id + " (" + foodItem.getName() + ")" ;
   }
   
   /*
-   * Author: Dariana Gonzalez
-   * Modified (09/2019) to receive questionnaireId as parameter and save the results in the DB
+   * Modified by Dariana Gonzalez (09/2019) to receive questionnaireId as parameter and save the results in the DB
    */
   @PostMapping("/calculate/{questionnaireId}") 
   public Result calculateTotals(@PathVariable("questionnaireId") String questionnaireId, @RequestBody ArrayList<FoodItemInput> userChoices) {
