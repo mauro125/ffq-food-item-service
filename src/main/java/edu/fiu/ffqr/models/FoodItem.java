@@ -22,6 +22,9 @@ public class FoodItem implements Serializable {
   private SugarSetting additionalSugar;
   @JsonProperty("primary")
   private boolean primary;
+  @JsonProperty("nutrientId")
+  private String nutrientId;
+  
   
   // Constructors
   public FoodItem() {}

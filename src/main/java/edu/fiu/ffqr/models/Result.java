@@ -1,4 +1,5 @@
 package edu.fiu.ffqr.models;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.bson.types.ObjectId;
@@ -11,9 +12,18 @@ public class Result {
 	
 	@Id
 	private ObjectId id;
+	
+	@JsonProperty("patientName")
+	private String patientName;
+	
+	@JsonProperty("ageInMonths")
+	private int ageInMonths;
 
 	@JsonProperty("questionnaireId")
 	private String questionnaireId; 
+	
+	@JsonProperty("userChoices")
+	ArrayList<FoodItemInput> userChoices;
 	
 	@JsonProperty("weeklyTotals")
 	Map<String, Double> weeklyTotals = new HashMap<String, Double>();
@@ -21,11 +31,22 @@ public class Result {
 	@JsonProperty("dailyAverages")
 	Map<String, Double> dailyAverages = new HashMap<String, Double>();
 	
-	public Result(String questionnaireId, Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages){
+	public Result(String questionnaireId, int ageInMonths, ArrayList<FoodItemInput> userChoices, Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages){
 		
+		this.patientName = "pending";
+		this.ageInMonths = ageInMonths;
 		this.questionnaireId = questionnaireId;
+		this.userChoices = userChoices;
 		this.weeklyTotals = weeklyTotals;
 		this.dailyAverages = dailyAverages;
+	}
+	
+	public void setuserChoices(ArrayList<FoodItemInput> userChoices){
+		this.userChoices = userChoices;
+	}
+	
+	public ArrayList<FoodItemInput> getuserChoices(){
+		return this.userChoices;
 	}
 	
 	public void setquestionnaireId(String questionnaireId){

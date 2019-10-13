@@ -12,7 +12,7 @@ import edu.fiu.ffqr.service.NutrientListService;
 
 public class FFQCalculator {
 	
-	public static Result calculateTotals(String questionnaireId, ArrayList<FoodItemInput> userChoices, NutrientListService nlService) {
+	public static Result calculateTotals(String questionnaireId, int ageInMonths, ArrayList<FoodItemInput> userChoices, NutrientListService nlService) {
 		
 		//get list of valid nutrients
 		String[] nutrients = ValidNutrientList.validNutrients;
@@ -25,7 +25,7 @@ public class FFQCalculator {
 				weeklyTotals.put(nutrients[i], 0.0);
 				dailyAverages.put(nutrients[i], 0.0);
 			}
-			return new Result(questionnaireId, weeklyTotals, dailyAverages);
+			return new Result(questionnaireId, ageInMonths, userChoices, weeklyTotals, dailyAverages);
 		}
 		
 		NutrientList tbspSugar = nlService.getWithNutrientListID("suga");
@@ -153,7 +153,7 @@ public class FFQCalculator {
 		weeklyTotals.put("% Calories from Carbs", percentageCalFromCarbsWeekly);
 		dailyAverages.put("% Calories from Carbs", weeklyTotals.get("% Calories from Carbs"));
 				
-		Result results = new Result(questionnaireId, weeklyTotals, dailyAverages);
+		Result results = new Result(questionnaireId, ageInMonths, userChoices, weeklyTotals, dailyAverages);
 		return results;
 		
 	}
