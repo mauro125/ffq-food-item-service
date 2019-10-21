@@ -1,6 +1,7 @@
 package edu.fiu.ffqr.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,13 +10,17 @@ public class FoodNutrients implements Serializable {
 	@JsonProperty("foodItem")
 	private FoodItem foodItem;
 	@JsonProperty("nutrientList")
-	private NutrientList nutrientList;
+	private ArrayList<NutrientList> nutrientList = new ArrayList<NutrientList>();
 	
 	public FoodNutrients(){}
 	
-	public FoodNutrients(FoodItem foodItem, NutrientList nutrientList){
+	public FoodNutrients(FoodItem foodItem, ArrayList<NutrientList> nutrientList){
 		this.setFoodItem(foodItem);
 		this.setNutrientList(nutrientList);
+	}
+	
+	public void addNutrientList(NutrientList nutrientList) {
+		this.nutrientList.add(nutrientList);
 	}
 
 	public FoodItem getFoodItem() {
@@ -26,11 +31,11 @@ public class FoodNutrients implements Serializable {
 		this.foodItem = foodItem;
 	}
 
-	public NutrientList getNutrientList() {
+	public ArrayList<NutrientList> getNutrientList() {
 		return nutrientList;
 	}
 
-	public void setNutrientList(NutrientList nutrientList) {
+	public void setNutrientList(ArrayList<NutrientList> nutrientList) {
 		this.nutrientList = nutrientList;
 	}
 }

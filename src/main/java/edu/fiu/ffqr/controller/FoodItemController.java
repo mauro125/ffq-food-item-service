@@ -17,6 +17,7 @@ import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.FoodItemInput;
 import edu.fiu.ffqr.models.FoodNutrients;
+import edu.fiu.ffqr.models.FoodType;
 import edu.fiu.ffqr.models.NutrientList;
 import edu.fiu.ffqr.service.FFQFoodEntryService;
 import edu.fiu.ffqr.service.NutrientListService;
@@ -47,20 +48,20 @@ public class FoodItemController {
   public FoodItemController() {}
   
   @GetMapping("/allfoodsnutrients")
-  public List<FoodNutrients> allFoods() throws JsonProcessingException {
+  public List<FoodItem> allFoods() throws JsonProcessingException {
 	  
-	  List<FoodNutrients> listFoodsNutrients = new ArrayList<>();
+	  //List<FoodNutrients> listFoodsNutrients = new ArrayList<>();
 	  
 	  List<FoodItem> foods = foodItemService.getAll();
 	  
-	  for(FoodItem food : foods) {
-		  NutrientList nutrientList = new NutrientList();
-		  nutrientList = nutrientListService.getWithNutrientListID(food.getNutrientId());
-		  FoodNutrients foodNutrients = new FoodNutrients(food, nutrientList);
-		  listFoodsNutrients.add(foodNutrients);
-	  }
+	  //for(FoodItem food : foods) {
+		  //NutrientList nutrientList = new NutrientList();
+		  //nutrientList = nutrientListService.getWithNutrientListID(food.getNutrientId());
+		  //FoodNutrients foodNutrients = new FoodNutrients(food, nutrientList);
+		  //listFoodsNutrients.add(foodNutrients);
+	  //}
 	  
-	  return listFoodsNutrients;
+	  return foods;
   }  
   
   @GetMapping("/foodnutrients/{foodItemId}")
@@ -69,9 +70,19 @@ public class FoodItemController {
 	  FoodItem foodItem = new FoodItem();	  
 	  NutrientList nutrientList = new NutrientList();	
 	  
-	  foodItem = foodItemService.getFoodItemBy_id(id);	  
-	  nutrientList = nutrientListService.getWithNutrientListID(foodItem.getFoodTypes().get(0).getNutrientListID());	  
-	  FoodNutrients foodNutrients = new FoodNutrients(foodItem, nutrientList);	
+	  // retrieve the food item
+	  foodItem = foodItemService.getFoodItemBy_id(id);
+	  
+	  FoodNutrients foodNutrients = new FoodNutrients();
+	  foodNutrients.setFoodItem(foodItem);
+	  
+	  for(FoodType foodType : foodItem.getFoodTypes()) {
+		  nutrientList = nutrientListService.getWithNutrientListID(foodType.getNutrientListID());
+		  foodNutrients.addNutrientList(nutrientList);
+		  
+	  }
+	  	  
+	  	
 	  
 	  return foodNutrients;
   }
@@ -80,7 +91,12 @@ public class FoodItemController {
   public FoodNutrients createFoodNutrients(@RequestBody FoodNutrients foodNutrients) throws JsonProcessingException {
 	  
 	  foodItemService.create(foodNutrients.getFoodItem());
-	  nutrientListService.create(foodNutrients.getNutrientList());
+	  
+	  for( NutrientList nutrientlist: foodNutrients.getNutrientList()) {
+		  nutrientListService.create(nutrientlist);
+	  }
+	  
+	  
 	  
 	  return foodNutrients;
   }
@@ -129,31 +145,31 @@ public class FoodItemController {
 	  }
 	  
 	  if (newItem.getServingsList() == null && newItem.getAdditionalSugar() == null && newItem.isPrimary()) {
-		  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.isPrimary());
+		  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.isPrimary(), newItem.getPortionSize());
 		  foodItemService.create(fi);  
 	  }
 	  else if (newItem.getServingsList() == null && newItem.getAdditionalSugar() == null) {
-		  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes());
+		  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.getPortionSize());
 		  foodItemService.create(fi);  
 	  }  
 	  else if (newItem.getAdditionalSugar() == null && !newItem.isPrimary()) {
-		  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes());
+		  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getPortionSize());
 		  foodItemService.create(fi);
 	  }
 	  else if (newItem.getAdditionalSugar() == null && newItem.isPrimary()) {
-		  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.isPrimary());
+		  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.isPrimary(), newItem.getPortionSize());
 		  foodItemService.create(fi);
 	  }
 	  else if (newItem.getServingsList() == null && !newItem.isPrimary()) {
-		  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.getAdditionalSugar());
+		  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.getPortionSize());
 		  foodItemService.create(fi);
 	  }
 	  else if (newItem.getServingsList() == null && newItem.isPrimary()) {
-		  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.isPrimary());
+		  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.isPrimary(), newItem.getPortionSize());
 		  foodItemService.create(fi);
 	  }
 	  else {
-		  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar());
+		  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.getPortionSize());
 		  foodItemService.create(fi);
 	  }
 	  

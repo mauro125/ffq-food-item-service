@@ -24,51 +24,70 @@ public class FoodItem implements Serializable {
   private boolean primary;
   @JsonProperty("nutrientId")
   private String nutrientId;
+  @Field("portionSize")
+  private String portionSize;
   
   
   // Constructors
   public FoodItem() {}
   
-  public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes) {
+  public FoodItem(String name, ArrayList<FoodType> foodTypes, boolean primary, String portionSize) {
+	    this._id = new ObjectId();
+	    this.name = name;
+	  //default serving
+		ArrayList<ServingOptions> servingList = new ArrayList<ServingOptions>(); 
+		servingList.add(new ServingOptions("1 OZ/unit"));
+	 	this.servingsList = servingList;
+	    this.foodTypes = foodTypes;
+	    this.primary = primary;
+	    this.portionSize = portionSize;      
+  }
+  
+  public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, String portionSize) {
     this._id = new ObjectId();
     this.name = name;
     this.servingsList = servings;
     this.foodTypes = foodTypes;
     this.primary = false;
+    this.portionSize = portionSize;  
   } 
   
-  public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, boolean primary) {
+  public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, boolean primary, String portionSize) {
 	this._id = new ObjectId();
     this.name = name;
     this.servingsList = servings;
 	this.foodTypes = foodTypes;
 	this.primary = true;
+	this.portionSize = portionSize;  
   }
 
-  public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, SugarSetting addSugar) {
+  public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, SugarSetting addSugar, String portionSize) {
 	this._id = new ObjectId();
 	this.name = name;
 	this.servingsList = servings;
 	this.foodTypes = foodTypes;
 	this.additionalSugar = addSugar;
 	this.primary = false;
+	this.portionSize = portionSize;  
   }
   
-  public FoodItem(ObjectId id, String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, SugarSetting addSugar, boolean primary) {
+  public FoodItem(ObjectId id, String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, SugarSetting addSugar, boolean primary, String portionSize) {
     this._id = id;
     this.name = name;
 	this.servingsList = servings;
 	this.foodTypes = foodTypes;
 	this.additionalSugar = addSugar;
 	this.primary = true;
+	this.portionSize = portionSize;  
   }
 
-  public FoodItem(String name, ArrayList<FoodType> foodTypes, SugarSetting addSugar) {
+  public FoodItem(String name, ArrayList<FoodType> foodTypes, SugarSetting addSugar, String portionSize) {
 	this._id = new ObjectId();
 	this.name = name;
 	this.foodTypes = foodTypes;
 	this.additionalSugar = addSugar;
 	this.primary = false;
+	this.portionSize = portionSize;  
 	
 	//default serving
 	ArrayList<ServingOptions> servingList = new ArrayList<ServingOptions>(); 
@@ -76,12 +95,13 @@ public class FoodItem implements Serializable {
  	this.servingsList = servingList;
   } 
   
-  public FoodItem(String name, ArrayList<FoodType> foodTypes, SugarSetting addSugar, boolean primary) {
+  public FoodItem(String name, ArrayList<FoodType> foodTypes, SugarSetting addSugar, boolean primary, String portionSize) {
 	this._id = new ObjectId();
 	this.name = name;
 	this.foodTypes = foodTypes;
 	this.additionalSugar = addSugar;
 	this.primary = true;
+	this.portionSize = portionSize;  
 		
 	//default serving
 	ArrayList<ServingOptions> servingList = new ArrayList<ServingOptions>(); 
@@ -89,11 +109,12 @@ public class FoodItem implements Serializable {
 	this.servingsList = servingList;
   }
 
-  public FoodItem(String name, ArrayList<FoodType> foodTypes) {
+  public FoodItem(String name, ArrayList<FoodType> foodTypes, String portionSize) {
 	this._id = new ObjectId();
 	this.name = name;
 	this.foodTypes = foodTypes;
 	this.primary = false;	
+	this.portionSize = portionSize;  
 	
 	//default serving
 	ArrayList<ServingOptions> servingList = new ArrayList<ServingOptions>(); 
@@ -101,17 +122,7 @@ public class FoodItem implements Serializable {
 	this.servingsList = servingList;
   }
   
-  public FoodItem(String name, ArrayList<FoodType> foodTypes, boolean primary) {
-	this._id = new ObjectId();
-	this.name = name;
-	this.foodTypes = foodTypes;
-	this.primary = true;	
-		
-	//default serving
-	ArrayList<ServingOptions> servingList = new ArrayList<ServingOptions>(); 
-	servingList.add(new ServingOptions("1 OZ/unit"));
-	this.servingsList = servingList;
-  }
+
 
   public String getName() { 
     return this.name; 
@@ -164,4 +175,12 @@ public class FoodItem implements Serializable {
   public void setPrimary(boolean primary) {
 	this.primary = primary;
   }
+  
+  public String getPortionSize() {
+		return portionSize;
+	  }
+
+	  public void setPortionSize(String portionSize) {
+		this.portionSize = portionSize;
+	  }
 }
