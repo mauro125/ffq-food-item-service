@@ -24,4 +24,8 @@ public class ResultsService {
 	public Result create(Result results) {		
 		return responsesRepository.save(results);
 	}
+	
+    public Result getResultByQuestionnaireID(String questionnaireID) {
+    	return responsesRepository.findByQuestionnaireId(questionnaireID);
+    }
 }

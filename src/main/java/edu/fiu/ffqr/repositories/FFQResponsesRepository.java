@@ -8,4 +8,5 @@ import edu.fiu.ffqr.models.Result;
 public interface FFQResponsesRepository extends MongoRepository<Result, String> {
 
 	Result findByQuestionnaireId(String id);
+ 
 }

@@ -43,36 +43,59 @@ public class Result {
 		this.dailyAverages = dailyAverages;
 	}
 	
-	public void setuserChoices(ArrayList<FoodItemInput> userChoices){
-		this.userChoices = userChoices;
-	}
-	
-	public ArrayList<FoodItemInput> getuserChoices(){
-		return this.userChoices;
-	}
-	
-	public void setquestionnaireId(String questionnaireId){
-		this.questionnaireId = questionnaireId;
-	}
-	
-	public String getQuestionnaireId(){
-		return this.questionnaireId;
+	public ObjectId getId() {
+		return id;
 	}
 
-	public Map<String, Double> getWeeklyTotals(){
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
+	}
+
+	public int getAgeInMonths() {
+		return ageInMonths;
+	}
+
+	public void setAgeInMonths(int ageInMonths) {
+		this.ageInMonths = ageInMonths;
+	}
+
+	public String getQuestionnaireId() {
+		return questionnaireId;
+	}
+
+	public void setQuestionnaireId(String questionnaireId) {
+		this.questionnaireId = questionnaireId;
+	}
+
+	public ArrayList<FoodItemInput> getUserChoices() {
+		return userChoices;
+	}
+
+	public void setUserChoices(ArrayList<FoodItemInput> userChoices) {
+		this.userChoices = userChoices;
+	}
+
+	public Map<String, Double> getWeeklyTotals() {
 		return weeklyTotals;
 	}
 
-	public void setWeeklyTotals(Map<String, Double> weeklyTotals){
+	public void setWeeklyTotals(Map<String, Double> weeklyTotals) {
 		this.weeklyTotals = weeklyTotals;
 	}
 
-	public Map<String, Double> getDailyAverages(){
+	public Map<String, Double> getDailyAverages() {
 		return dailyAverages;
 	}
 
-	public void setDailyAverages(Map<String, Double> dailyAverages){
+	public void setDailyAverages(Map<String, Double> dailyAverages) {
 		this.dailyAverages = dailyAverages;
 	}
-	
 }
