@@ -1,0 +1,21 @@
+[
+{"nutrient_name": "Retinol (mcg)","estimatedAverageByAge": {"0-6": 400,"7-12": 500, "13-24": 210}},
+{"nutrient_name": "Vitamin D (calciferol) (mcg)","estimatedAverageByAge": {"0-6": 10,"7-12": 10, "13-24": 10}},
+{"nutrient_name": "Vitamin E (Total Alpha-Tocopherol) (mg)","estimatedAverageByAge": {"0-6": 4,"7-12": 5, "13-24": 5}},
+{"nutrient_name": "Vitamin K (phylloquinone) (mcg)","estimatedAverageByAge": {"0-6": 2,"7-12": 2.5, "13-24": 30}},
+{"nutrient_name": "Vitamin C (ascorbic acid) (mg)","estimatedAverageByAge": {"0-6": 40,"7-12": 50, "13-24": 15}},
+{"nutrient_name": "Thiamin (vitamin B1) (mg)","estimatedAverageByAge": {"0-6": 0.2,"7-12": 0.3, "13-24": 0.4}},
+{"nutrient_name": "Riboflavin (vitamin B2) (mg)","estimatedAverageByAge": {"0-6": 0.3,"7-12": 0.4, "13-24": 0.4}},
+{"nutrient_name": "Niacin (vitamin B3) (mg)","estimatedAverageByAge": {"0-6": 2.0,"7-12": 4.0, "13-24": 5.0}},
+{"nutrient_name": "Pantothenic Acid (mg)","estimatedAverageByAge": {"0-6": 1.7,"7-12": 1.8, "13-24": 2.0}},
+{"nutrient_name": "Vitamin B-6 (pyridoxine, pyridoxyl, & pyridoxamine) (mg)","estimatedAverageByAge": {"0-6": 0.1,"7-12": 0.3, "13-24": 0.4}},
+{"nutrient_name": "Total Folate (mcg)","estimatedAverageByAge": {"0-6": 65,"7-12": 80, "13-24": 120}},
+{"nutrient_name": "Vitamin B-12 (cobalamin) (mcg)","estimatedAverageByAge": {"0-6": 65,"7-12": 80, "13-24": 120}},
+{"nutrient_name": "Calcium (mg)","estimatedAverageByAge": {"0-6": 200,"7-12": 260, "13-24": 500}},
+{"nutrient_name": "Phosphorus (mg)","estimatedAverageByAge": {"0-6": 100,"7-12": 275, "13-24": 380}},
+{"nutrient_name": "Magnesium (mg)","estimatedAverageByAge": {"0-6": 30,"7-12": 75, "13-24": 65}},
+{"nutrient_name": "Iron (mg)","estimatedAverageByAge": {"0-6": 0.3,"7-12": 6.9, "13-24": 3}},
+{"nutrient_name": "Zinc (mg)","estimatedAverageByAge": {"0-6": 2,"7-12": 2.5, "13-24": 25}},
+{"nutrient_name": "Copper (mg)","estimatedAverageByAge": {"0-6": 0.2,"7-12": 0.2, "13-24": 0.3}},
+{"nutrient_name": "Potassium (mg)","estimatedAverageByAge": {"0-6": 400,"7-12": 700, "13-24": 3000}}
+]
