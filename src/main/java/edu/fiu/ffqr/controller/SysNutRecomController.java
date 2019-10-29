@@ -45,7 +45,7 @@ public class SysNutRecomController {
 		return SysNutrientsRecommendations;		
 	}
 	
-	@GetMapping("/calculateNutrientsRecommendations/{questionnaireID}")
+	@GetMapping("/calculate/{questionnaireID}")
 	  public NutrientRecommendation calculateNutrientsRecommendations(@PathVariable("questionnaireID") String questionnaireID) throws Exception {
 		
 		String ageRange = "";
