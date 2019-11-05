@@ -8,20 +8,24 @@ public class FoodType implements Serializable {
 	private String typeName;
 	@JsonProperty("nutrientListID")
 	private String nutrientListID;
+	@JsonProperty("category")
+	private String category;
 	
 	public FoodType() {}
 	
-	public FoodType(String nutrientListID) {
+	public FoodType(String nutrientListID, String category) {
 		this.typeName = null;
 		this.nutrientListID = nutrientListID;
+		this.category = category;
 	}
 	
-	public FoodType(String name, String nutrientListID) {
+	public FoodType(String name, String nutrientListID, String category) {
 		if (nutrientListID == null && name != null) {
 			throw new IllegalArgumentException("NutrientList cannot be empty");
 		}
 		this.typeName = name;
 		this.nutrientListID = nutrientListID;
+		this.category = category;
 	}
 
 	public String getTypeName() {
@@ -44,6 +48,14 @@ public class FoodType implements Serializable {
 
 	public void setNutrientListID(String nutrientListID) {
 		this.nutrientListID = nutrientListID;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 }
