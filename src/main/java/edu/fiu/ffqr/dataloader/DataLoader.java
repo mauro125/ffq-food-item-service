@@ -1,52 +1,49 @@
 package edu.fiu.ffqr.dataloader;
-
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import edu.fiu.ffqr.controller.FoodItemController;
-import edu.fiu.ffqr.controller.SysNutRecomController;
+import edu.fiu.ffqr.controller.FoodItemRecommendationController;
+import edu.fiu.ffqr.controller.NutrientRecommendationController;
 import edu.fiu.ffqr.models.FoodItem;
+import edu.fiu.ffqr.models.SysFoodItemRecommendation;
 import edu.fiu.ffqr.models.SysNutrientRecommendation;
+import edu.fiu.ffqr.repositories.FFQFSysFoodItemRecomRepository;
 import edu.fiu.ffqr.repositories.FFQFSysNutRecomRepository;
 import edu.fiu.ffqr.repositories.FFQFoodEntryRepository;
 import edu.fiu.ffqr.repositories.NutrientListRepository;
 import edu.fiu.ffqr.service.NutrientListService;
 
-
 @Component
 public class DataLoader {
 	
-	private FFQFoodEntryRepository foodRepository;
-	
-	private NutrientListRepository nutrientRepository;
-	
+	private FFQFoodEntryRepository foodRepository;	
+	private NutrientListRepository nutrientRepository;	
 	private FFQFSysNutRecomRepository sysNutRecomRepository;
-	
-	private NutrientListService nutrientService;
-	
-	private FoodItemController foodController;
-	
-	private SysNutRecomController sysNutRecomController;
+	private FFQFSysFoodItemRecomRepository sysFoodItemRecomRepository;
+	private NutrientListService nutrientService;	
+	private FoodItemController foodItemController;	
+	private NutrientRecommendationController sysNutRecomController;
+	private FoodItemRecommendationController sysFoodItemRecomController;
 	
 	public DataLoader(FFQFoodEntryRepository foodRepository, 
 			NutrientListRepository nutrientRepository, NutrientListService nutrientService, FoodItemController foodController, 
-			SysNutRecomController sysNutRecomController, FFQFSysNutRecomRepository sysNutRecomRepository) {
+			NutrientRecommendationController sysNutRecomController, FFQFSysNutRecomRepository sysNutRecomRepository,
+			FFQFSysFoodItemRecomRepository sysFoodItemRecomRepository, FoodItemRecommendationController sysFoodItemRecomController) {
 		this.foodRepository = foodRepository;
 		this.nutrientRepository = nutrientRepository;
 		this.nutrientService = nutrientService;
-		this.foodController = foodController;
+		this.foodItemController = foodController;
 		this.sysNutRecomController = sysNutRecomController;
 		this.sysNutRecomRepository = sysNutRecomRepository;
+		this.sysFoodItemRecomRepository = sysFoodItemRecomRepository;
+		this.sysFoodItemRecomController = sysFoodItemRecomController;
 	}
 	
 	// Added by Dariana Gonzalez 10/2019
@@ -83,6 +80,40 @@ public class DataLoader {
 		}		
 	}
 	
+	// Added by Dariana Gonzalez 11/2019
+	public void loadSysFoodItemsRecommendations() {
+			
+			System.out.println("<------- Loading System Food Items Recommendations... ------->");
+			
+			this.sysFoodItemRecomRepository.deleteAll();
+			
+			try {
+			
+				String resourceName = "SysFoodRecommendationsPayload.json";		
+			
+				ClassLoader classLoader = getClass().getClassLoader();
+				InputStream inputStream = classLoader.getResourceAsStream(resourceName);
+				JSONParser jsonParser = new JSONParser();		
+				JSONArray jsonArray = (JSONArray) jsonParser
+					.parse(new InputStreamReader(inputStream));
+				ObjectMapper mapper = new ObjectMapper();
+				List<SysFoodItemRecommendation> sysFoodItemRecomList = new ArrayList<>();
+			
+				for (Object object : jsonArray) {
+					JSONObject jsonObject = (JSONObject) object;
+					SysFoodItemRecommendation item = mapper.readValue(jsonObject.toString(), SysFoodItemRecommendation.class);
+					sysFoodItemRecomList.add(item);
+				}
+				for(SysFoodItemRecommendation item : sysFoodItemRecomList) {
+					System.out.println(item.getCategoryName() + "---- Loaded!");
+					this.sysFoodItemRecomController.create(item);
+				}
+			} catch (Exception e) {
+				System.err.println("An error occurred while loading System Food Items Recommendations: ");
+				e.printStackTrace();
+			}		
+    }
+	
 	public void load() {
 		System.out.println("Loading fooditems...");
 		try {
@@ -107,7 +138,7 @@ public class DataLoader {
 				foodList.add(item);
 			}
 			for(FoodItem item : foodList) {
-				this.foodController.create(item);
+				this.foodItemController.create(item);
 			}			
 			System.out.println("A total of " + foodList.size() + " food items were added to food_items collection");
 			
