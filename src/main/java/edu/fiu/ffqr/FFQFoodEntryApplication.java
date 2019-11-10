@@ -37,6 +37,10 @@ public class FFQFoodEntryApplication {
 		// Added by Dariana Gonzalez 10/25/2019
 		// Load list of system nutrients recommendations
 		loader.loadSysNutrientsRecommendations();
+		
+		// Added by Dariana Gonzalez 10/25/2019
+	    // Load list of system food items recommendations
+		loader.loadSysFoodItemsRecommendations();
 	}
 	
 	@Bean
