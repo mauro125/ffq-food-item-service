@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import edu.fiu.ffqr.models.SysNutrientRecommendation;
-import edu.fiu.ffqr.repositories.FFQFSysNutRecomRepository;
+import edu.fiu.ffqr.repositories.SysNutRecommendationRepository;
 
 @Service
 @Component
 public class SysNutrientRecommendationService {
 
 	@Autowired
-	private FFQFSysNutRecomRepository sysNutRecomRepository;
+	private SysNutRecommendationRepository sysNutRecomRepository;
 	
 	public List<SysNutrientRecommendation> getAll()	{
 		return sysNutRecomRepository.findAll();
