@@ -14,7 +14,7 @@ import edu.fiu.ffqr.controller.NutrientRecommendationController;
 import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.SysFoodRecommendation;
 import edu.fiu.ffqr.models.SysNutrientRecommendation;
-import edu.fiu.ffqr.repositories.FFQFSysFoodItemRecomRepository;
+import edu.fiu.ffqr.repositories.SysFoodRecommendationRepository;
 import edu.fiu.ffqr.repositories.FFQFSysNutRecomRepository;
 import edu.fiu.ffqr.repositories.FFQFoodEntryRepository;
 import edu.fiu.ffqr.repositories.NutrientListRepository;
@@ -26,7 +26,7 @@ public class DataLoader {
 	private FFQFoodEntryRepository foodRepository;	
 	private NutrientListRepository nutrientRepository;	
 	private FFQFSysNutRecomRepository sysNutRecomRepository;
-	private FFQFSysFoodItemRecomRepository sysFoodItemRecomRepository;
+	private SysFoodRecommendationRepository sysFoodItemRecomRepository;
 	private NutrientListService nutrientService;	
 	private FoodItemController foodItemController;	
 	private NutrientRecommendationController sysNutRecomController;
@@ -35,7 +35,7 @@ public class DataLoader {
 	public DataLoader(FFQFoodEntryRepository foodRepository, 
 			NutrientListRepository nutrientRepository, NutrientListService nutrientService, FoodItemController foodController, 
 			NutrientRecommendationController sysNutRecomController, FFQFSysNutRecomRepository sysNutRecomRepository,
-			FFQFSysFoodItemRecomRepository sysFoodItemRecomRepository, FoodRecommendationController sysFoodItemRecomController) {
+			SysFoodRecommendationRepository sysFoodItemRecomRepository, FoodRecommendationController sysFoodItemRecomController) {
 		this.foodRepository = foodRepository;
 		this.nutrientRepository = nutrientRepository;
 		this.nutrientService = nutrientService;

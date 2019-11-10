@@ -19,7 +19,7 @@ import edu.fiu.ffqr.models.Recommendation;
 import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.models.SysNutrientRecommendation;
 import edu.fiu.ffqr.service.ResultsService;
-import edu.fiu.ffqr.service.SysNutRecomService;
+import edu.fiu.ffqr.service.SysNutrientRecommendationService;
 
 /*
  * Author: Dariana Gonzalez
@@ -28,15 +28,15 @@ import edu.fiu.ffqr.service.SysNutRecomService;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/nutrientsrecommendations")
-public class SysNutRecomController {
+public class NutrientRecommendationController {
 
 	@Autowired
-	private SysNutRecomService SysNutRecomService;
+	private SysNutrientRecommendationService SysNutRecomService;
 	
 	@Autowired
 	private ResultsService resultsService;
 	
-	public SysNutRecomController() {}
+	public NutrientRecommendationController() {}
 	
 	// return all the system nutrient recommendations
 	@GetMapping("/all")

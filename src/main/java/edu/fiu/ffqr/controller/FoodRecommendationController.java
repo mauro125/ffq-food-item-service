@@ -19,8 +19,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import edu.fiu.ffqr.models.FoodCategoryRecommendation;
 import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.FoodItemInput;
-import edu.fiu.ffqr.models.FoodItemRecommendation;
-import edu.fiu.ffqr.models.FoodItemRecommendationRange;
+import edu.fiu.ffqr.models.FoodRecommendation;
+import edu.fiu.ffqr.models.FoodRecommendationRange;
 import edu.fiu.ffqr.models.FoodType;
 import edu.fiu.ffqr.models.Result;
 
@@ -61,7 +61,7 @@ public class FoodRecommendationController {
 	}
 	
 	@GetMapping("/calculate/{questionnaireID}")
-	  public FoodItemRecommendation calculateFoodRecommendations(@PathVariable("questionnaireID") String questionnaireID) throws Exception {
+	  public FoodRecommendation calculateFoodRecommendations(@PathVariable("questionnaireID") String questionnaireID) throws Exception {
 		
 		String foodItemName = "";
 		String nutrientListID = "";
@@ -78,7 +78,7 @@ public class FoodRecommendationController {
 		ArrayList<FoodItemInput> userChoices = result.getUserChoices();
 		
 		// instantiate Food Item Recommendation object
-		FoodItemRecommendation foodItemRecommendation = new FoodItemRecommendation();
+		FoodRecommendation foodItemRecommendation = new FoodRecommendation();
 		
 		foodItemRecommendation.setQuestionnaireId(questionnaireID);
 		foodItemRecommendation.setPatientAgeInMonths(infantAge);
@@ -179,12 +179,12 @@ public class FoodRecommendationController {
 			else
 				throw new Exception("There are no recommendations available for infants of age over 24 months");
 			
-			List<FoodItemRecommendationRange> rangeList = sysFoodItemRecommendation.getRecommendationsByAge().get(ageRange);
+			List<FoodRecommendationRange> rangeList = sysFoodItemRecommendation.getRecommendationsByAge().get(ageRange);
 			
 			boolean notFound = true;
 			
 			
-				for (FoodItemRecommendationRange range: rangeList) {
+				for (FoodRecommendationRange range: rangeList) {
 					if (calculatedAmount >= range.getFrom() && calculatedAmount <= range.getTo() && notFound)
 					{
 						foodItemRec.setRangeFrom(range.getFrom());

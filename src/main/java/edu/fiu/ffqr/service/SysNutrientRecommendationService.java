@@ -2,18 +2,16 @@ package edu.fiu.ffqr.service;
 
 import java.util.List;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.SysNutrientRecommendation;
 import edu.fiu.ffqr.repositories.FFQFSysNutRecomRepository;
 
 @Service
 @Component
-public class SysNutRecomService {
+public class SysNutrientRecommendationService {
 
 	@Autowired
 	private FFQFSysNutRecomRepository sysNutRecomRepository;
