@@ -31,19 +31,26 @@ public class FoodItem implements Serializable {
   // Constructors
   public FoodItem() {}
   
-  public FoodItem(String name, ArrayList<FoodType> foodTypes, boolean primary, String portionSize) {
+  public FoodItem(String name, ArrayList<ServingOptions> servingsList,  ArrayList<FoodType> foodTypes, SugarSetting additionalSugar, boolean primary, String portionSize) {
 	    this._id = new ObjectId();
 	    this.name = name;
-	  //default serving
-		ArrayList<ServingOptions> servingList = new ArrayList<ServingOptions>(); 
-		servingList.add(new ServingOptions("1 OZ/unit"));
-	 	this.servingsList = servingList;
+	    
+	    //default serving
+		if ( servingsList == null) {
+			ArrayList<ServingOptions> servingList = new ArrayList<ServingOptions>(); 
+			servingList.add(new ServingOptions("1 OZ/unit"));
+			this.servingsList = servingList;
+		}
+		else
+			this.servingsList = servingsList;
+		
+		this.additionalSugar = additionalSugar;
 	    this.foodTypes = foodTypes;
 	    this.primary = primary;
-	    this.portionSize = portionSize;      
+	    this.portionSize = portionSize;
   }
   
-  public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, String portionSize) {
+  /*public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, String portionSize) {
     this._id = new ObjectId();
     this.name = name;
     this.servingsList = servings;
@@ -51,6 +58,13 @@ public class FoodItem implements Serializable {
     this.primary = false;
     this.portionSize = portionSize;  
   } 
+  
+  public FoodItem(String name,ArrayList<FoodType> foodTypes,boolean primary, String portionSize) {
+	  this.name = name;  
+	  this.foodTypes = foodTypes;
+	  this.primary = primary;
+	  this.portionSize = portionSize;  	  
+} 
   
   public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, boolean primary, String portionSize) {
 	this._id = new ObjectId();
@@ -120,7 +134,7 @@ public class FoodItem implements Serializable {
 	ArrayList<ServingOptions> servingList = new ArrayList<ServingOptions>(); 
 	servingList.add(new ServingOptions("1 OZ/unit"));
 	this.servingsList = servingList;
-  }
+  }*/
   
 
 
@@ -178,9 +192,9 @@ public class FoodItem implements Serializable {
   
   public String getPortionSize() {
 		return portionSize;
-	  }
+  }
 
-	  public void setPortionSize(String portionSize) {
+  public void setPortionSize(String portionSize) {
 		this.portionSize = portionSize;
-	  }
+  }
 }

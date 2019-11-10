@@ -14,6 +14,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import edu.fiu.ffqr.calculator.FFQCalculator;
 import edu.fiu.ffqr.models.Result;
+import edu.fiu.ffqr.models.ServingOptions;
+import edu.fiu.ffqr.models.SugarSetting;
 import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.FoodItemInput;
 import edu.fiu.ffqr.models.FoodNutrients;
@@ -144,6 +146,11 @@ public class FoodItemController {
 		  }
 	  }
 	  
+	  
+	  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.isPrimary(), newItem.getPortionSize());
+	  foodItemService.create(fi);  
+	  
+	  /*
 	  if (newItem.getServingsList() == null && newItem.getAdditionalSugar() == null && newItem.isPrimary()) {
 		  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.isPrimary(), newItem.getPortionSize());
 		  foodItemService.create(fi);  
@@ -171,7 +178,7 @@ public class FoodItemController {
 	  else {
 		  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.getPortionSize());
 		  foodItemService.create(fi);
-	  }
+	  }*/
 	  
 	  return fi;
   }
