@@ -152,6 +152,36 @@ public class FoodRecommendationController {
 							
 							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
 						}
+						if(nutrientListID.equalsIgnoreCase("icec")) {
+							
+							currentTotal = (29.5 * foodItem.getFrequency() / 28.35); // 1 ice cream serving = 29.5 grams, defined by PO
+							
+							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+								currentTotal = currentTotal / 7;
+							}
+							
+							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
+						}
+						if(nutrientListID.equalsIgnoreCase("pancrefi")) {
+							
+							currentTotal = (45.8 * foodItem.getFrequency() / 28.35); // 1 refined pancake = 45.8 grams, defined by PO
+							
+							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+								currentTotal = currentTotal / 7;
+							}
+							
+							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
+						}
+						if(nutrientListID.equalsIgnoreCase("pancwhol")) {
+							
+							currentTotal = (49.7 * foodItem.getFrequency() / 28.35); // 1 whole pancake = 49.7 grams, defined by PO
+							
+							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+								currentTotal = currentTotal / 7;
+							}
+							
+							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
+						}
 				}
 			}
 		}
@@ -164,16 +194,13 @@ public class FoodRecommendationController {
 			calculatedAmount = categoryValueMap.get(sysFoodItemRecommendation.getCategoryName());
 			foodItemRec.setCalculatedAmount(calculatedAmount);
 			
-			if(infantAge >= 0 && infantAge <= 6)
-			{
+			if(infantAge >= 0 && infantAge <= 6){
 				ageRange = "0-6";
 			}
-			else if(infantAge >= 7 && infantAge <= 12)
-			{
+			else if(infantAge >= 7 && infantAge <= 12){
 				ageRange = "7-12";
 			}
-			else if(infantAge >= 13 && infantAge <= 24)
-			{
+			else if(infantAge >= 13 && infantAge <= 24){
 				ageRange = "13-24";
 			}
 			else
@@ -183,21 +210,18 @@ public class FoodRecommendationController {
 			
 			boolean notFound = true;
 			
-			
-				for (FoodRecommendationRange range: rangeList) {
-					if (calculatedAmount >= range.getFrom() && calculatedAmount <= range.getTo() && notFound)
-					{
-						foodItemRec.setRangeFrom(range.getFrom());
-						foodItemRec.setRangeTo(range.getTo());
-						foodItemRec.setLabel(range.getLabel());
-						notFound = false;
-					}
-				}				
-			
+			for (FoodRecommendationRange range: rangeList) {
+				if (calculatedAmount >= range.getFrom() && calculatedAmount <= range.getTo() && notFound)
+				{
+					foodItemRec.setRangeFrom(range.getFrom());
+					foodItemRec.setRangeTo(range.getTo());
+					foodItemRec.setLabel(range.getLabel());
+					notFound = false;
+				}
+			}	
 			
 			foodItemRecommendation.getFoodCategoryRecList().add(foodItemRec);
-		}
-		
+		}		
 				
 		return foodItemRecommendation;
 	}
