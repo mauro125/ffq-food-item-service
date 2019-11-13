@@ -82,8 +82,7 @@ public class FoodItemController {
 		  nutrientList = nutrientListService.getWithNutrientListID(foodType.getNutrientListID());
 		  foodNutrients.addNutrientList(nutrientList);
 		  
-	  }
-	  	  
+	  } 	  
 	  	
 	  
 	  return foodNutrients;
@@ -92,13 +91,22 @@ public class FoodItemController {
   @PostMapping("/createfoodnutrients")
   public FoodNutrients createFoodNutrients(@RequestBody FoodNutrients foodNutrients) throws JsonProcessingException {
 	  
-	  foodItemService.create(foodNutrients.getFoodItem());
+	  ArrayList<FoodType> foodTypesList = foodNutrients.getFoodItem().getFoodTypes();
 	  
-	  for( NutrientList nutrientlist: foodNutrients.getNutrientList()) {
-		  nutrientListService.create(nutrientlist);
+	  // validate nutrientID does not exist 
+	  for (FoodType foodType : foodTypesList) {
+	  
+		  String requestNutrientID = foodType.getNutrientListID();
+		  
+		  if (nutrientListService.getWithNutrientListID(requestNutrientID) != null)		  
+			  throw new IllegalArgumentException("Nutrient ID: " + foodType.getNutrientListID() + " already exists");
 	  }
 	  
+	  foodItemService.create(foodNutrients.getFoodItem());
 	  
+	  for (NutrientList nutrientlist: foodNutrients.getNutrientList()) {
+		  nutrientListService.create(nutrientlist);
+	  }
 	  
 	  return foodNutrients;
   }
