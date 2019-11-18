@@ -204,7 +204,15 @@ public class FoodRecommendationController {
 						categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
 					}
 					else
-						categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + (Double.parseDouble(foodItem.getServing().split(" ")[0]) * foodItem.getFrequency()));
+					{
+						currentTotal = (foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0])); // 
+						
+						if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+							currentTotal = currentTotal / 7;
+						}
+						
+						categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
+					}
 					}
 				}
 			}
