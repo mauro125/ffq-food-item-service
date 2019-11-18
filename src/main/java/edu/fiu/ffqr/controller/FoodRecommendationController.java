@@ -119,11 +119,10 @@ public class FoodRecommendationController {
 					
 					System.out.println(categoryValueMap.get(categoryName));
 					
-					if(foodItem.getServing() != null)
-						categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + (Double.parseDouble(foodItem.getServing().split(" ")[0]) * foodItem.getFrequency()));
-					else
+					if(foodItem.getServing() == null)
+					{
 						if(nutrientListID.equalsIgnoreCase("chee")) {
-														
+							
 							currentTotal = (25.2 * foodItem.getFrequency() / 28.35);
 							
 							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
@@ -132,7 +131,7 @@ public class FoodRecommendationController {
 							
 							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
 						}
-						if(nutrientListID.equalsIgnoreCase("yogu")) {
+						else if(nutrientListID.equalsIgnoreCase("yogu")) {
 							
 							currentTotal = (113.4 * foodItem.getFrequency() / 28.35);
 							
@@ -142,9 +141,9 @@ public class FoodRecommendationController {
 							
 							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
 						}
-						if(nutrientListID.equalsIgnoreCase("soyp")) {
+						else if(nutrientListID.equalsIgnoreCase("soyp")) {
 														
-							currentTotal = (28.4 * foodItem.getFrequency() / 28.35);
+							currentTotal = (28.4 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35);
 							
 							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
 								currentTotal = currentTotal / 7;
@@ -152,19 +151,9 @@ public class FoodRecommendationController {
 							
 							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
 						}
-						if(nutrientListID.equalsIgnoreCase("icec")) {
+						else if(nutrientListID.equalsIgnoreCase("icec")) {
 							
-							currentTotal = (29.5 * foodItem.getFrequency() / 28.35); // 1 ice cream serving = 29.5 grams, defined by PO
-							
-							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
-								currentTotal = currentTotal / 7;
-							}
-							
-							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
-						}
-						if(nutrientListID.equalsIgnoreCase("pancrefi")) {
-							
-							currentTotal = (45.8 * foodItem.getFrequency() / 28.35); // 1 refined pancake = 45.8 grams, defined by PO
+							currentTotal = (29.5 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 ice cream serving = 29.5 grams, defined by PO
 							
 							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
 								currentTotal = currentTotal / 7;
@@ -172,16 +161,41 @@ public class FoodRecommendationController {
 							
 							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
 						}
-						if(nutrientListID.equalsIgnoreCase("pancwhol")) {
-							
-							currentTotal = (49.7 * foodItem.getFrequency() / 28.35); // 1 whole pancake = 49.7 grams, defined by PO
+						else {
+							currentTotal = foodItem.getFrequency();
 							
 							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
 								currentTotal = currentTotal / 7;
 							}
 							
 							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
-						}
+						}												
+					}
+					else 
+					{
+					if(nutrientListID.equalsIgnoreCase("pancrefi")) {
+							
+							currentTotal = (45.8 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 refined pancake = 45.8 grams, defined by PO
+							
+							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+								currentTotal = currentTotal / 7;
+							}
+							
+							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
+					}
+					else if(nutrientListID.equalsIgnoreCase("pancwhol")) {
+							
+							currentTotal = (49.7 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35); // 1 whole pancake = 49.7 grams, defined by PO
+							
+							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
+								currentTotal = currentTotal / 7;
+							}
+							
+							categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + currentTotal);
+					}
+					else
+						categoryValueMap.replace(categoryName, categoryValueMap.get(categoryName) + (Double.parseDouble(foodItem.getServing().split(" ")[0]) * foodItem.getFrequency()));
+					}
 				}
 			}
 		}
