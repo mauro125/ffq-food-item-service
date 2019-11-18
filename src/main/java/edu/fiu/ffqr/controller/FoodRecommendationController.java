@@ -143,7 +143,7 @@ public class FoodRecommendationController {
 						}
 						else if(nutrientListID.equalsIgnoreCase("soyp")) {
 														
-							currentTotal = (28.4 * foodItem.getFrequency() * Double.parseDouble(foodItem.getServing().split(" ")[0]) / 28.35);
+							currentTotal = (28.4 * foodItem.getFrequency() / 28.35);
 							
 							if (foodItem.getFrequencyType().equalsIgnoreCase("Week")) {
 								currentTotal = currentTotal / 7;
