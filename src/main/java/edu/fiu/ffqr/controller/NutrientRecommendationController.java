@@ -84,14 +84,14 @@ public class NutrientRecommendationController {
 			double calculatedValue = map.get(n.getNutrientName());
 			double recommendedValue = n.getEstimatedAverageByAge().get(ageRange);
 			
-			if(calculatedValue < recommendedValue) {
+			if(calculatedValue < recommendedValue - (recommendedValue * 0.10)) {
 				status = "Below";
 			}
-			else if(calculatedValue > recommendedValue) {
+			else if(calculatedValue > recommendedValue + (recommendedValue * 0.10)) {
 				status = "Above";
 			}
 			else
-				status = "Normal";
+				status = "Normal (±10% Recommended Value)";
 			
 			Recommendation recommedation = new Recommendation();
 			recommedation.setCalculatedAmount(calculatedValue);
