@@ -83,15 +83,18 @@ public class NutrientRecommendationController {
 			
 			double calculatedValue = map.get(n.getNutrientName());
 			double recommendedValue = n.getEstimatedAverageByAge().get(ageRange);
+			double percentageOfRecommended = Math.round((calculatedValue * 100 / recommendedValue)  * 100.0 ) / 100.0;
 			
 			if(calculatedValue < recommendedValue - (recommendedValue * 0.10)) {
-				status = "Below";
+				System.out.println(calculatedValue);
+				System.out.println(recommendedValue);
+				status = "Below (" + percentageOfRecommended + "%)";
 			}
 			else if(calculatedValue > recommendedValue + (recommendedValue * 0.10)) {
-				status = "Above";
+				status = "Above (" + percentageOfRecommended + "%)";
 			}
 			else
-				status = "Normal (±10% Recommended Value)";
+				status = "Normal (" + percentageOfRecommended + "%)";
 			
 			Recommendation recommedation = new Recommendation();
 			recommedation.setCalculatedAmount(calculatedValue);
