@@ -42,25 +42,25 @@ public class FFQFoodEntryService {
 		return foodRepository.save(fi);
 	}
 	
-	public FoodItem create(String name, ArrayList<FoodType> foodTypes) { 
-		 FoodItem fi = new FoodItem(name, foodTypes);
-		 return foodRepository.save(fi); 
-	 }
+	//public FoodItem create(String name, ArrayList<FoodType> foodTypes) { 
+		// FoodItem fi = new FoodItem(name, foodTypes);
+		// return foodRepository.save(fi); 
+	 //}
 	
-	public FoodItem create(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes) { 
-		 FoodItem fi = new FoodItem(name, servings, foodTypes);
-		 return foodRepository.save(fi); 
-	 }
+	//public FoodItem create(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes) { 
+		 //FoodItem fi = new FoodItem(name, servings, foodTypes);
+		 //return foodRepository.save(fi); 
+	 //}
 	
-	public FoodItem create(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, SugarSetting additionalSugar) { 
-		 FoodItem fi = new FoodItem(name, servings, foodTypes, additionalSugar);
-		 return foodRepository.save(fi); 
-	 }
+	//public FoodItem create(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, SugarSetting additionalSugar) { 
+		 //FoodItem fi = new FoodItem(name, servings, foodTypes, additionalSugar);
+		 //return foodRepository.save(fi); 
+	 //}
 	
-	public FoodItem create(String name, ArrayList<FoodType> foodTypes, SugarSetting additionalSugar) { 
-		 FoodItem fi = new FoodItem(name, foodTypes, additionalSugar);
-		 return foodRepository.save(fi); 
-	 }
+	//public FoodItem create(String name, ArrayList<FoodType> foodTypes, SugarSetting additionalSugar) { 
+		 //FoodItem fi = new FoodItem(name, foodTypes, additionalSugar);
+		 //return foodRepository.save(fi); 
+	 //}
 	
 	public void delete(String name) {
 		FoodItem fi = foodRepository.findByName(name);

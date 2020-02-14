@@ -232,32 +232,32 @@ public class FoodItemController {
 		  }
 		  
 		  if (newItem.getServingsList() == null && newItem.getAdditionalSugar() == null && newItem.isPrimary()) {
-			  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.isPrimary());
-			  foodItemService.create(fi);  
+			  //fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.isPrimary());
+			  //foodItemService.create(fi);  
 		  }
 		  else if (newItem.getServingsList() == null && newItem.getAdditionalSugar() == null) {
-			  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes());
-			  foodItemService.create(fi);  
+			  //fi = new FoodItem(newItem.getName(), newItem.getFoodTypes());
+			  //foodItemService.create(fi);  
 		  }  
 		  else if (newItem.getAdditionalSugar() == null && !newItem.isPrimary()) {
-			  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes());
-			  foodItemService.create(fi);
+			  //fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes());
+			  //foodItemService.create(fi);
 		  }
 		  else if (newItem.getAdditionalSugar() == null && newItem.isPrimary()) {
-			  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.isPrimary());
-			  foodItemService.create(fi);
+			  //fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.isPrimary());
+			  //foodItemService.create(fi);
 		  }
 		  else if (newItem.getServingsList() == null && !newItem.isPrimary()) {
-			  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.getAdditionalSugar());
-			  foodItemService.create(fi);
+			  //fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.getAdditionalSugar());
+			  //foodItemService.create(fi);
 		  }
 		  else if (newItem.getServingsList() == null && newItem.isPrimary()) {
-			  fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.isPrimary());
-			  foodItemService.create(fi);
+			  //fi = new FoodItem(newItem.getName(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.isPrimary());
+			  //foodItemService.create(fi);
 		  }
 		  else {
-			  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar());
-			  foodItemService.create(fi);
+			  //fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar());
+			  //foodItemService.create(fi);
 		  }
 
 	  }

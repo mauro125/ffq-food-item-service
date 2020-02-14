@@ -61,29 +61,85 @@ public class FFQCalculator {
 					//additional intake = amount of servings * value of nutrient per serving
 					double nutrientValuePerServing = selectedFoodType.getNutrient(nutrients[i]);
 					
-					if (selectedFoodType.getNutrientListID().equalsIgnoreCase("brea")) 
+					if (selectedFoodType.getNutrientListID().equalsIgnoreCase("brea"))
 						additionalIntake = amountOfServings * foodItem.getFrequency() * 5 * nutrientValuePerServing;
 					else
 						additionalIntake = amountOfServings * foodItem.getFrequency() * nutrientValuePerServing;
-						
-					dailyAverages.put(nutrients[i], dailyAverages.getOrDefault(nutrients[i], 0.0) + additionalIntake);
-				}
-
-				//iterate nutrients and update weekly intake
-				for (int i = 0; i < nutrients.length; i++) {
-					double additionalIntake = 0.0;
 					
-					//additional intake = amount of servings * value of nutrient per serving
-					double nutrientValuePerServing = selectedFoodType.getNutrient(nutrients[i]);
-					
-					if (selectedFoodType.getNutrientListID().equalsIgnoreCase("brea")) 
-						additionalIntake = amountOfServings * foodItem.getFrequency() * 5 * nutrientValuePerServing;
-					else
-						additionalIntake = amountOfServings * foodItem.getFrequency() * nutrientValuePerServing;
+					double finalDailyValue = dailyAverages.getOrDefault(nutrients[i], 0.0) + additionalIntake;
+					double finalWeeklyValue = weeklyTotals.getOrDefault(nutrients[i], 0.0) + additionalIntake * 7;
 
-					weeklyTotals.put(nutrients[i], weeklyTotals.getOrDefault(nutrients[i], 0.0) + additionalIntake * 7);
+					if(selectedFoodType.getNutrientListID().equalsIgnoreCase("brea"))
+					{
+						if(ageInMonths == 1)
+						{
+							finalDailyValue = finalDailyValue * 699;
+							finalWeeklyValue = finalWeeklyValue * 699;
+						}
+						else if(ageInMonths == 2)
+						{
+							finalDailyValue = finalDailyValue * 731;
+							finalWeeklyValue = finalWeeklyValue * 731;
+						}
+						else if(ageInMonths == 3)
+						{
+							finalDailyValue = finalDailyValue * 751;
+							finalWeeklyValue = finalWeeklyValue * 751;
+						}
+						else if(ageInMonths == 4)
+						{
+							finalDailyValue = finalDailyValue * 780;
+							finalWeeklyValue = finalWeeklyValue * 780;
+						}
+						else if(ageInMonths == 5)
+						{
+							finalDailyValue = finalDailyValue * 796;
+							finalWeeklyValue = finalWeeklyValue * 796;
+						}
+						else if(ageInMonths == 6)
+						{
+							finalDailyValue = finalDailyValue * 854;
+							finalWeeklyValue = finalWeeklyValue * 854;
+						}
+						else if(ageInMonths == 7)
+						{
+							finalDailyValue = finalDailyValue * 867;
+							finalWeeklyValue = finalWeeklyValue * 867;
+						}
+						else if(ageInMonths == 8)
+						{
+							finalDailyValue = finalDailyValue * 815;
+							finalWeeklyValue = finalWeeklyValue * 815;
+						}
+						else if(ageInMonths == 9)
+						{
+							finalDailyValue = finalDailyValue * 890;
+							finalWeeklyValue = finalWeeklyValue * 890;
+						}
+						else if(ageInMonths == 10)
+						{
+							finalDailyValue = finalDailyValue * 900;
+							finalWeeklyValue = finalWeeklyValue * 900;
+						}
+						else if(ageInMonths == 11)
+						{
+							finalDailyValue = finalDailyValue * 910;
+							finalWeeklyValue = finalWeeklyValue * 910;
+						}
+						else if(ageInMonths == 12)
+						{
+							finalDailyValue = finalDailyValue * 900;
+							finalWeeklyValue = finalWeeklyValue * 900;
+						}
+						else if(ageInMonths >= 13 && ageInMonths <= 24)
+						{
+							finalDailyValue = finalDailyValue * 500;
+							finalWeeklyValue = finalWeeklyValue * 500;
+						}						 
+					}
+					dailyAverages.put(nutrients[i], finalDailyValue);
+					weeklyTotals.put(nutrients[i], finalWeeklyValue);
 				}
-
 			}
 
 			//if user selected weekly frequency
@@ -109,23 +165,80 @@ public class FFQCalculator {
 					else
 						additionalIntake = amountOfServings * foodItem.getFrequency() * nutrientValuePerServing;
 
-					weeklyTotals.put(nutrients[i], weeklyTotals.getOrDefault(nutrients[i], 0.0) + additionalIntake);
-				}
+					double finalWeeklyValue = weeklyTotals.getOrDefault(nutrients[i], 0.0) + additionalIntake;
+					double finalDailyValue = dailyAverages.getOrDefault(nutrients[i], 0.0) + additionalIntake / 7;
 
-				//iterate nutrients and update daily average
-				for (int i = 0; i < nutrients.length; i++) {
-					double additionalIntake = 0.0;
-					//additional intake = amount of servings * value of nutrient per serving
-					double nutrientValuePerServing = selectedFoodType.getNutrient(nutrients[i]);
-					
-					if (selectedFoodType.getNutrientListID().equalsIgnoreCase("brea")) 
-						additionalIntake = amountOfServings * foodItem.getFrequency() * 5 * nutrientValuePerServing;
-					else
-						additionalIntake = amountOfServings * foodItem.getFrequency() * nutrientValuePerServing;
-
-					dailyAverages.put(nutrients[i], dailyAverages.getOrDefault(nutrients[i], 0.0) + additionalIntake / 7);
-				}	
-			
+					if(selectedFoodType.getNutrientListID().equalsIgnoreCase("brea"))
+					{
+						if(ageInMonths == 1)
+						{
+							finalDailyValue = finalDailyValue * 699;
+							finalWeeklyValue = finalWeeklyValue * 699;
+						}
+						else if(ageInMonths == 2)
+						{
+							finalDailyValue = finalDailyValue * 731;
+							finalWeeklyValue = finalWeeklyValue * 731;
+						}
+						else if(ageInMonths == 3)
+						{
+							finalDailyValue = finalDailyValue * 751;
+							finalWeeklyValue = finalWeeklyValue * 751;
+						}
+						else if(ageInMonths == 4)
+						{
+							finalDailyValue = finalDailyValue * 780;
+							finalWeeklyValue = finalWeeklyValue * 780;
+						}
+						else if(ageInMonths == 5)
+						{
+							finalDailyValue = finalDailyValue * 796;
+							finalWeeklyValue = finalWeeklyValue * 796;
+						}
+						else if(ageInMonths == 6)
+						{
+							finalDailyValue = finalDailyValue * 854;
+							finalWeeklyValue = finalWeeklyValue * 854;
+						}
+						else if(ageInMonths == 7)
+						{
+							finalDailyValue = finalDailyValue * 867;
+							finalWeeklyValue = finalWeeklyValue * 867;
+						}
+						else if(ageInMonths == 8)
+						{
+							finalDailyValue = finalDailyValue * 815;
+							finalWeeklyValue = finalWeeklyValue * 815;
+						}
+						else if(ageInMonths == 9)
+						{
+							finalDailyValue = finalDailyValue * 890;
+							finalWeeklyValue = finalWeeklyValue * 890;
+						}
+						else if(ageInMonths == 10)
+						{
+							finalDailyValue = finalDailyValue * 900;
+							finalWeeklyValue = finalWeeklyValue * 900;
+						}
+						else if(ageInMonths == 11)
+						{
+							finalDailyValue = finalDailyValue * 910;
+							finalWeeklyValue = finalWeeklyValue * 910;
+						}
+						else if(ageInMonths == 12)
+						{
+							finalDailyValue = finalDailyValue * 900;
+							finalWeeklyValue = finalWeeklyValue * 900;
+						}
+						else if(ageInMonths >= 13 && ageInMonths <= 24)
+						{
+							finalDailyValue = finalDailyValue * 500;
+							finalWeeklyValue = finalWeeklyValue * 500;
+						}
+					}
+					dailyAverages.put(nutrients[i], finalDailyValue);
+					weeklyTotals.put(nutrients[i], finalWeeklyValue);
+				}			
 			}
 			
 			else {
