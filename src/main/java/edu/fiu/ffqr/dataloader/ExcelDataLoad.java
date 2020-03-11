@@ -19,8 +19,10 @@ import edu.fiu.ffqr.models.NutrientList;
 import edu.fiu.ffqr.models.ValidNutrientList;
 import edu.fiu.ffqr.service.NutrientListService;
 
+
 public class ExcelDataLoad {
-	
+    
+    
 	private NutrientListService nutrientService;
 	
 	public ExcelDataLoad(NutrientListService ftService) {
@@ -29,7 +31,7 @@ public class ExcelDataLoad {
 	
 	public String dataLoad() {
 		int itemsAdded = 0;
-		ArrayList<String> validNutrients = new ArrayList<String>();
+        ArrayList<String> validNutrients = new ArrayList<String>();
 		
 		String resourceName = "FFQRDatabase.xlsx";
 		
@@ -48,7 +50,7 @@ public class ExcelDataLoad {
             for (int i = 2; i < nutrientNames.getPhysicalNumberOfCells(); i++) {
             	validNutrients.add(nutrientNames.getCell(i).getStringCellValue());
             }
-
+        
              //skip first row, we already dealt with it
              iterator.next();
 
@@ -74,7 +76,10 @@ public class ExcelDataLoad {
 	                 if (currentCell.getCellType() == CellType.NUMERIC) {
 	                	 //add values to map
 	                	 int columnIndex = currentCell.getColumnIndex();
-	                	 nutrientMap.put(validNutrients.get(columnIndex -2), currentCell.getNumericCellValue());
+                        /*
+                         nutrientMap.put(validNutrients.get(columnIndex -2), currentCell.getNumericCellValue());
+                         */
+                         nutrientMap.put(ValidNutrientList.validNutrients[columnIndex -2], currentCell.getNumericCellValue());
 	                 }
 	                 
                 }
@@ -98,7 +103,7 @@ public class ExcelDataLoad {
                 }
 
             }        
-            
+                       
             System.out.println("A total of " + itemsAdded + " items were added to the nutrient_lists collection");
              
         } catch (FileNotFoundException e) {
