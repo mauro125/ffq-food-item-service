@@ -3,6 +3,8 @@ package edu.fiu.ffqr.calculator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*;
+
 import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.models.FoodItemInput;
 import edu.fiu.ffqr.models.NutrientList;
@@ -34,6 +36,7 @@ public class FFQCalculator {
 			NutrientListService nlService) {
 
 		// get list of valid nutrients
+		
 		String[] nutrients = ValidNutrientList.validNutrients;
 
 		Map<String, Double> weeklyTotals = new HashMap<String, Double>();
