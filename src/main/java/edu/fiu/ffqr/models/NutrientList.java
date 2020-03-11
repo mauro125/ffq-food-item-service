@@ -19,9 +19,9 @@ public class NutrientList {
 	
 	public NutrientList() {}
 	
-	public NutrientList(String nutrientListID, Map<String, Double> nutrientMap) {
-		//check that all nutrients are valid
-		for (String nutrient: nutrientMap.keySet()) {
+	public NutrientList(final String nutrientListID, final Map<String, Double> nutrientMap) {
+		//check that all nutrients are valid		
+		for (final String nutrient: nutrientMap.keySet()) {
 			if (!Arrays.stream(ValidNutrientList.validNutrients).anyMatch(nutrient::equals)) {
 				throw new IllegalArgumentException("The nutrient " + nutrient + " is not valid");
 			}
@@ -36,7 +36,7 @@ public class NutrientList {
 		return id.toHexString();
 	}
 
-	public void setId(ObjectId id) {
+	public void setId(final ObjectId id) {
 		this.id = id;
 	}
 
@@ -44,7 +44,7 @@ public class NutrientList {
 		return nutrientListID;
 	}
 
-	public void setNutrientListID(String nutrientListID) {
+	public void setNutrientListID(final String nutrientListID) {
 		this.nutrientListID = nutrientListID;
 	}
 
@@ -52,9 +52,9 @@ public class NutrientList {
 		return nutrientMap;
 	}
 
-	public void setNutrientMap(Map<String, Double> nutrientMap) {
+	public void setNutrientMap(final Map<String, Double> nutrientMap) {
 		//check that all nutrients are valid
-		for (String nutrient: nutrientMap.keySet()) {
+		for (final String nutrient: nutrientMap.keySet()) {
 			if (!Arrays.stream(ValidNutrientList.validNutrients).anyMatch(nutrient::equals)) {
 				throw new IllegalArgumentException("The nutrient " + nutrient + " is not valid");
 			}
@@ -63,7 +63,7 @@ public class NutrientList {
 		this.nutrientMap = nutrientMap;
 	}
 	
-	public double getNutrient(String nutrient) {
+	public double getNutrient(final String nutrient) {
 		return nutrientMap.get(nutrient);
 	}
 	
