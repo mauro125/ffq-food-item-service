@@ -32,7 +32,7 @@ public class Result {
 	
 	@JsonProperty("dailyAverages")
 	Map<String, Double> dailyAverages = new HashMap<String, Double>();
-	
+
 	public Result(String questionnaireId, int ageInMonths, ArrayList<FoodItemInput> userChoices, Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages){
 		
 		this.patientName = "pending";
