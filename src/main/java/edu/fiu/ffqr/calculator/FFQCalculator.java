@@ -325,7 +325,7 @@ public class FFQCalculator {
 		if(value >= 100){
 			newValue = (double)((int)value);
 		}  
-		else if(value >= 10){
+		else if((value >= 10)&&(value < 100)){
 			newValue = ((double)((int)(value*10)))/10.0;
 		}
 		else{
