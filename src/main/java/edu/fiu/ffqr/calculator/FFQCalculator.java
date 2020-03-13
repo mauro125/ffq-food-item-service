@@ -131,6 +131,7 @@ public class FFQCalculator {
 					dailyAverages.put(nutrients[i], finalDailyValue);
 					weeklyTotals.put(nutrients[i], finalDailyValue * 7.00);
 				}
+			}
 			
 			//if user selected weekly frequency
 			else if (foodItem.getFrequencyType().equalsIgnoreCase("week")) {
@@ -182,6 +183,7 @@ public class FFQCalculator {
 					dailyAverages.put(nutrients[i], finalDailyValue);
 					weeklyTotals.put(nutrients[i], finalDailyValue * 7.00);		
 				}
+			}
 				
 				else {
 					throw new IllegalArgumentException("Frequency type must be day or week");
@@ -207,15 +209,12 @@ public class FFQCalculator {
 		double percentageCalFromCarbsWeekly = caloriesFromCarbsWeekly * 100 / weeklyTotals.get("Energy (kcal)");
 		weeklyTotals.put("% Calories from Carbs", percentageCalFromCarbsWeekly);
 		dailyAverages.put("% Calories from Carbs", weeklyTotals.get("% Calories from Carbs"));
-
-
 			
 		//Khalid Alamoudi - Change below to return the modified versions of dailyAverages and weeklyTotals
 		//===============================================================
 		//--Calculating total calories
 		double totalCalories = weeklyTotals.get("% Calories from Fat") + weeklyTotals.get("% Calories from Protein") +
 		weeklyTotals.get("% Calories from Carbs");
-		//double modifiedTotalCalories = threeDigitView(totalCalories);
 		weeklyTotals.put("Total Calories (g)", totalCalories);
 		dailyAverages.put("Total Calories (g)", weeklyTotals.get("Total Calories (g)"));
 
@@ -232,13 +231,7 @@ public class FFQCalculator {
 			}
 		}
 
-
-
-
-		
-		//Result results = new Result(questionnaireId, ageInMonths, userChoices, weeklyTotals, dailyAverages);
-		Result results = new Result(questionnaireId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages
-		/*,modifiedTotalCalories*/);
+		Result results = new Result(questionnaireId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages);
 		//End of added code
 		//===============================================================
 		return results;
@@ -249,7 +242,6 @@ public class FFQCalculator {
 	//================================================================================
 	public static Map<String, Double> modifiedMap(Map<String, Double> mapInput){
 
-
 		Map<String, Double> newMap = new HashMap<>();
 		for(String key: mapInput.keySet()){
 			double value = mapInput.get(key);
@@ -257,6 +249,7 @@ public class FFQCalculator {
 		}
 		return newMap;
 	}
+
 	public static double threeDigitView(double value){
 		double newValue = value;
 		if(value >= 100){
@@ -270,6 +263,8 @@ public class FFQCalculator {
 		}
 		return newValue;
 	}
+	//End of added code
+	//===================================================================================
 
 	private static double calculateBreastMilk(int ageInMonths, double finalDailyValue)
 	{
@@ -395,5 +390,3 @@ public class FFQCalculator {
 		return 0.0;
 	}
 }
-//End of added code
-//===================================================================================
