@@ -121,7 +121,7 @@ public class DataLoader {
 				e.printStackTrace();
 			}		
 	}
-	
+
 	public void loadFoodDescription() {
 		
 		System.out.println("<------- Loading Food Description ------->");
@@ -190,6 +190,6 @@ public class DataLoader {
 			
 		System.out.println("...Loading complete!");	
 	}
-	
+
 	
 }
