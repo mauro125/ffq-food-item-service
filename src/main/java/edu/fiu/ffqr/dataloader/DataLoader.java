@@ -112,8 +112,8 @@ public class DataLoader {
 				System.err.println("An error occurred while loading System Food Items Recommendations: ");
 				e.printStackTrace();
 			}		
-    }
-	
+	}
+
 	public void load() {
 		System.out.println("Loading fooditems...");
 		try {
@@ -149,6 +149,6 @@ public class DataLoader {
 			
 		System.out.println("...Loading complete!");	
 	}
-	
+
 	
 }
