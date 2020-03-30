@@ -40,42 +40,42 @@ public class FoodDescriptionController {
         return foodDescriptionService.getAll();
     }
 
-    @GetMapping("/{questionnaireID}")
-    public FoodDescription foodGroupDescription(@PathVariable("questionnaireID") String questionnaireID) throws Exception
-     {
-         int infantAge = 0;
+    // @GetMapping("/{questionnaireID}")
+    // public FoodDescription foodGroupDescription(@PathVariable("questionnaireID") String questionnaireID) throws Exception
+    //  {
+    //      int infantAge = 0;
 
-         FoodDescription foodItemDescription = new FoodDescription();
+    //      FoodDescription foodItemDescription = new FoodDescription();
 
 
-         // get results for given questionnaire
-         Result result = resultsService.getResultByQuestionnaireID(questionnaireID);
+    //      // get results for given questionnaire
+    //      Result result = resultsService.getResultByQuestionnaireID(questionnaireID);
 
-         infantAge = result.getAgeInMonths();
+    //      infantAge = result.getAgeInMonths();
 
-         foodItemDescription.getImageUrl();
+    //      foodItemDescription.getImageUrl();
 
-         if(infantAge < 6)
-         {
-             foodDescriptionService.findByDailyFoodIntake(foodItemDescription.getDailyFoodIntake());
-         }
-         foodItemDescription.getFoodItemGroupName();
-         foodItemDescription.getDailyFoodIntake();
-         foodItemDescription.getDescription();
+    //      if(infantAge < 6)
+    //      {
+    //          foodDescriptionService.findByDailyFoodIntake(foodItemDescription.getDailyFoodIntake());
+    //      }
+    //      foodItemDescription.getFoodItemGroupName();
+    //      foodItemDescription.getDailyFoodIntake();
+    //      foodItemDescription.getDescription();
 
-         return foodItemDescription;
-    }
+    //      return foodItemDescription;
+    // }
 
     @GetMapping("/{foodItemGroupName}")
     public FoodDescription collectionByFoodItemGroupName(@PathVariable("foodItemGroupName") String foodItemGroupName)
     {
-        return foodDescriptionService.getCollectionByFoodItemGroupName(foodItemGroupName);
+        return foodDescriptionService.findByFoodItemGroupName(foodItemGroupName);
     }
 
     @PostMapping("/create")
 	public FoodDescription createFoodDescription(@RequestBody FoodDescription foodDescription) throws JsonProcessingException {
 		
-		if(foodDescriptionService.findByDailyFoodIntake(foodDescription.getFoodItemGroupName()) != null)
+		if(foodDescriptionService.findByFoodItemGroupName(foodDescription.getFoodItemGroupName()) != null)
 		{
 			throw new IllegalArgumentException("Food Item Description " + foodDescription.getFoodItemGroupName() + " already exists.");			
 		}

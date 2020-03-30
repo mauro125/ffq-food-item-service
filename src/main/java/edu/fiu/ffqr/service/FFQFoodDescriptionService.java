@@ -32,11 +32,7 @@ public class FFQFoodDescriptionService {
         return foodDescriptionRepository.save(foodDescription);
     }
 
-    public FoodDescription getCollectionByFoodItemGroupName(String foodItemGroupName) {
-		return foodDescriptionRepository.getCollectionByFoodItemGroupName(foodItemGroupName);
+    public FoodDescription findByFoodItemGroupName(String foodItemGroupName) {
+		    return foodDescriptionRepository.findByFoodItemGroupName(foodItemGroupName);
     }
-    
-    public FoodDescription findByDailyFoodIntake(String dailyFoodIntake) {
-		return foodDescriptionRepository.findByDailyFoodIntake(dailyFoodIntake);
-	}
 }

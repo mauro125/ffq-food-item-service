@@ -15,8 +15,12 @@ public class FoodDescription implements Serializable {
     private String imageUrl;
     @Field("foodItemGroupName")
     private String foodItemGroupName;
-    @Field("dailyFoodIntake")
-    private String dailyFoodIntake;
+    @Field("firstBracketIntake")
+    private String firstBracketIntake;
+    @Field("secondBracketIntake")
+    private String secondBracketIntake;
+    @Field("thirdBracketIntake")
+    private String thirdBracketIntake;
     @Field("description")
     private String description;
 
@@ -25,11 +29,14 @@ public class FoodDescription implements Serializable {
     public FoodDescription() {
     }
 
-    public FoodDescription(String imageUrl, String foodItemGroupName, String dailyFoodIntake, String description) {
+    public FoodDescription(String imageUrl, String foodItemGroupName, String firstBracketIntake, String secondBracketIntake, 
+    String thirdBracketIntake, String description) {
         this._id = new ObjectId();
         this.imageUrl = imageUrl;
         this.foodItemGroupName = foodItemGroupName;
-        this.dailyFoodIntake = dailyFoodIntake;
+        this.firstBracketIntake = firstBracketIntake;
+        this.secondBracketIntake = secondBracketIntake;
+        this.thirdBracketIntake = thirdBracketIntake;
         this.description = description;
     }
 
@@ -49,12 +56,28 @@ public class FoodDescription implements Serializable {
         this.foodItemGroupName = foodItemGroupName;
     }
 
-    public String getDailyFoodIntake() {
-        return dailyFoodIntake;
+    public String getFirstBracketIntake() {
+        return firstBracketIntake;
     }
 
-    public void setDailyFoodIntake(String dailyFoodIntake) {
-        this.dailyFoodIntake = dailyFoodIntake;
+    public void setFirstBracketIntake(String firstBracketIntake) {
+        this.firstBracketIntake = firstBracketIntake;
+    }
+
+    public String getSecondBracketIntake() {
+        return secondBracketIntake;
+    }
+
+    public void setSecondBracketIntake(String secondBracketIntake) {
+        this.secondBracketIntake = secondBracketIntake;
+    }
+
+    public String getThirdBracketIntake() {
+        return thirdBracketIntake;
+    }
+
+    public void setThirdBracketIntake(String thirdBracketIntake) {
+        this.thirdBracketIntake = thirdBracketIntake;
     }
 
     public String getDescription() {
@@ -64,8 +87,4 @@ public class FoodDescription implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public String findByDailyFoodIntake() {
-	    return this.dailyFoodIntake;
-	  }
 }
