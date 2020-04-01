@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.fiu.ffqr.controller.FoodItemController;
 import edu.fiu.ffqr.controller.FoodRecommendationController;
 import edu.fiu.ffqr.controller.NutrientRecommendationController;
+import edu.fiu.ffqr.models.FoodDescription;
 import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.SysFoodRecommendation;
 import edu.fiu.ffqr.models.SysNutrientRecommendation;
@@ -19,6 +20,8 @@ import edu.fiu.ffqr.repositories.SysNutRecommendationRepository;
 import edu.fiu.ffqr.repositories.FFQFoodEntryRepository;
 import edu.fiu.ffqr.repositories.NutrientListRepository;
 import edu.fiu.ffqr.service.NutrientListService;
+import edu.fiu.ffqr.controller.FoodDescriptionController;
+import edu.fiu.ffqr.repositories.FFQFoodDescriptionRepository;
 
 @Component
 public class DataLoader {
@@ -31,11 +34,14 @@ public class DataLoader {
 	private FoodItemController foodItemController;	
 	private NutrientRecommendationController sysNutRecomController;
 	private FoodRecommendationController sysFoodItemRecomController;
+	private FoodDescriptionController foodDescriptionController;
+	private FFQFoodDescriptionRepository foodDescriptionRepository;
 	
 	public DataLoader(FFQFoodEntryRepository foodRepository, 
 			NutrientListRepository nutrientRepository, NutrientListService nutrientService, FoodItemController foodController, 
 			NutrientRecommendationController sysNutRecomController, SysNutRecommendationRepository sysNutRecomRepository,
-			SysFoodRecommendationRepository sysFoodItemRecomRepository, FoodRecommendationController sysFoodItemRecomController) {
+			SysFoodRecommendationRepository sysFoodItemRecomRepository, FoodRecommendationController sysFoodItemRecomController,
+			FoodDescriptionController foodDescriptionController, FFQFoodDescriptionRepository foodDescriptionRepository) {
 		this.foodRepository = foodRepository;
 		this.nutrientRepository = nutrientRepository;
 		this.nutrientService = nutrientService;
@@ -44,6 +50,8 @@ public class DataLoader {
 		this.sysNutRecomRepository = sysNutRecomRepository;
 		this.sysFoodItemRecomRepository = sysFoodItemRecomRepository;
 		this.sysFoodItemRecomController = sysFoodItemRecomController;
+		this.foodDescriptionController = foodDescriptionController;
+		this.foodDescriptionRepository = foodDescriptionRepository;
 	}
 	
 	// Added by Dariana Gonzalez 10/2019
@@ -112,7 +120,40 @@ public class DataLoader {
 				System.err.println("An error occurred while loading System Food Items Recommendations: ");
 				e.printStackTrace();
 			}		
-    }
+	}
+	
+	public void loadFoodDescription() {
+		
+		System.out.println("<------- Loading Food Description ------->");
+		
+		this.foodDescriptionRepository.deleteAll();
+		
+		try {
+		
+			String resourceName = "FoodDescriptionPayload.json";		
+		
+			ClassLoader classLoader = getClass().getClassLoader();
+			InputStream inputStream = classLoader.getResourceAsStream(resourceName);
+			JSONParser jsonParser = new JSONParser();		
+			JSONArray jsonArray = (JSONArray) jsonParser
+				.parse(new InputStreamReader(inputStream));
+			ObjectMapper mapper = new ObjectMapper();
+			List<FoodDescription> foodDescriptionList = new ArrayList<>();
+		
+			for (Object object : jsonArray) {
+				JSONObject jsonObject = (JSONObject) object;
+				FoodDescription item = mapper.readValue(jsonObject.toString(), FoodDescription.class);
+				foodDescriptionList.add(item);
+			}
+			for(FoodDescription item : foodDescriptionList) {
+				System.out.println(item.getFoodItemGroupName() + "---- Loaded!");
+				this.foodDescriptionController.createFoodDescription(item);
+			}
+		} catch (Exception e) {
+			System.err.println("An error occurred while loading System Nutrients Recommendations: ");
+			e.printStackTrace();
+		}		
+	}
 	
 	public void load() {
 		System.out.println("Loading fooditems...");

@@ -3,8 +3,6 @@ package edu.fiu.ffqr.calculator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.*;
-
 import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.models.FoodItemInput;
 import edu.fiu.ffqr.models.NutrientList;
@@ -36,7 +34,6 @@ public class FFQCalculator {
 			NutrientListService nlService) {
 
 		// get list of valid nutrients
-		
 		String[] nutrients = ValidNutrientList.validNutrients;
 
 		Map<String, Double> weeklyTotals = new HashMap<String, Double>();
@@ -53,31 +50,31 @@ public class FFQCalculator {
 		NutrientList tbspSugar = nlService.getWithNutrientListID("suga");
 
 		double amountOfServings = 0.0;
-		double servingsInMilliliters = 0.0;
-		double remainingMilliters = 0.0;
+		double breastMilkNeeded = 0.0;
+		double dailyFormulaServing = 0.0;
 
-		boolean isFormulaAndBreastMilkConsumed = false;
-		boolean isBreastMilkChosen = false;
-		boolean isFormulaChosen = false;
+		//for each food item that the user selected 
+		for (FoodItemInput foodItem: userChoices) {
+	
+			if(foodItem.getNutrientListID().equalsIgnoreCase("form"))
+			{
+				//get amount of servings for item
+				if(foodItem.getServing() == null || foodItem.getServing().isEmpty())
+					amountOfServings = 1;
+				else
+					amountOfServings = Double.parseDouble(foodItem.getServing().split(" ")[0]);
 
-		//Check for consumption of breastmilk and formula together
-		for (FoodItemInput foodItem: userChoices)
-		{
-			if(foodItem.getNutrientListID() == "form")
-			{
-				isFormulaChosen = true;
-			}
-			if(foodItem.getNutrientListID() == "brea")
-			{
-				isBreastMilkChosen = true;
+				dailyFormulaServing = amountOfServings * foodItem.getFrequency();
+
+				if (foodItem.getFrequencyType().equalsIgnoreCase("week")) {
+					dailyFormulaServing /= 7.0;
+				}
+
+				break;
 			}
 		}
 
-		if(isFormulaChosen && isBreastMilkChosen)
-		{
-			isFormulaAndBreastMilkConsumed = true;
-		}
-		
+		breastMilkNeeded = calculateFormulaAndBreastMilk(ageInMonths, dailyFormulaServing);
 
 		//for each food item that the user selected 
 		for (FoodItemInput foodItem: userChoices) {
@@ -111,7 +108,7 @@ public class FFQCalculator {
 
 					if (selectedFoodType.getNutrientListID().equalsIgnoreCase("brea")) 
 					{
-						additionalIntake = nutrientValuePerServing;
+						additionalIntake = nutrientValuePerServing * breastMilkNeeded;
 					}
 					else
 					{
@@ -120,14 +117,6 @@ public class FFQCalculator {
 					
 					double finalDailyValue = dailyAverages.getOrDefault(nutrients[i], 0.0) + additionalIntake;
 
-					if(selectedFoodType.getNutrientListID().equalsIgnoreCase("brea") && !isFormulaAndBreastMilkConsumed)
-					{
-						finalDailyValue = calculateBreastMilk(ageInMonths, finalDailyValue);
-					}
-					else if(selectedFoodType.getNutrientListID().equalsIgnoreCase("brea") && isFormulaAndBreastMilkConsumed)
-					{
-						finalDailyValue = calculateFormulaAndBreastMilk(ageInMonths, amountOfServings, servingsInMilliliters, remainingMilliters);
-					}
 					dailyAverages.put(nutrients[i], finalDailyValue);
 					weeklyTotals.put(nutrients[i], finalDailyValue * 7.00);
 				}
@@ -153,42 +142,27 @@ public class FFQCalculator {
 
 					if (selectedFoodType.getNutrientListID().equalsIgnoreCase("brea"))
 					{
-						additionalIntake = nutrientValuePerServing;
+						additionalIntake = nutrientValuePerServing * breastMilkNeeded;
+						if(foodItem.getFrequency() < 7)
+						{
+							additionalIntake = 0.0;
+						}
 					}
 					else
 					{
 						additionalIntake = amountOfServings * foodItem.getFrequency() * nutrientValuePerServing;
+						additionalIntake /= 7.00;
 					}
 
-					double finalDailyValue = dailyAverages.getOrDefault(nutrients[i], 0.0) + additionalIntake / 7.00;
+					double finalDailyValue = dailyAverages.getOrDefault(nutrients[i], 0.0) + additionalIntake;
 
-					if(selectedFoodType.getNutrientListID().equalsIgnoreCase("brea"))
-					{
-						if(foodItem.getFrequency() > 6)
-						{
-							if(!isFormulaAndBreastMilkConsumed)
-							{
-								finalDailyValue = calculateBreastMilk(ageInMonths, finalDailyValue);
-							}
-							else if(isFormulaAndBreastMilkConsumed)
-							{
-								finalDailyValue = calculateFormulaAndBreastMilk(ageInMonths, amountOfServings, servingsInMilliliters, remainingMilliters);
-							}
-						}
-						else
-						{
-							finalDailyValue = 0.0;
-						}
-					}
 					dailyAverages.put(nutrients[i], finalDailyValue);
 					weeklyTotals.put(nutrients[i], finalDailyValue * 7.00);		
 				}
+			} else {
+				throw new IllegalArgumentException("Frequency type must be day or week");
 			}
-				
-				else {
-					throw new IllegalArgumentException("Frequency type must be day or week");
-				}
-			}
+		}
 
 		//calculate % calories from protein, fat, and carbs
 		
@@ -266,68 +240,10 @@ public class FFQCalculator {
 	//End of added code
 	//===================================================================================
 
-	private static double calculateBreastMilk(int ageInMonths, double finalDailyValue)
+	private static double calculateFormulaAndBreastMilk(int ageInMonths, double amountOfServings)
 	{
-		if(ageInMonths == 1)
-		{
-			finalDailyValue *= oneMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 2)
-		{
-			finalDailyValue *= twoMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 3)
-		{
-			finalDailyValue *= threeMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 4)
-		{
-			finalDailyValue *= fourMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 5)
-		{
-			finalDailyValue *= fiveMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 6)
-		{
-			finalDailyValue *= sixMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 7)
-		{
-			finalDailyValue *= sevenMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 8)
-		{
-			finalDailyValue *= eightMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 9)
-		{
-			finalDailyValue *= nineMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 10)
-		{
-			finalDailyValue *= tenMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 11)
-		{
-			finalDailyValue *= elevenMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths == 12)
-		{
-			finalDailyValue *= twelveMonthInfantBreastMilkVolume;
-		}
-		else if(ageInMonths >= 13 && ageInMonths <= 24)
-		{
-			finalDailyValue *= thirteenThroughTwentyFourMonthInfantBreastMilkVolume;
-		}
-
-		return finalDailyValue;
-	}
-
-	private static double calculateFormulaAndBreastMilk(int ageInMonths, double amountOfServings,
-	double servingsInMilliliters, double remainingMilliters)
-	{
-		servingsInMilliliters = amountOfServings * ouncesToMilliliter;
+		double servingsInMilliliters = amountOfServings * ouncesToMilliliter;
+		double remainingMilliters = 0.0;
 
 		if(ageInMonths == 1)
 		{
