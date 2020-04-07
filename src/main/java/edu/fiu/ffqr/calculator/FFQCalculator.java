@@ -30,7 +30,7 @@ public class FFQCalculator {
 	static final double ouncesToMilliliter = 29.5735;
 
 	//Khalid Alamoudi - Added total calories to the parameters and return
-	public static Result calculateTotals(String questionnaireId, int ageInMonths, ArrayList<FoodItemInput> userChoices,
+	public static Result calculateTotals(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices,
 			NutrientListService nlService) {
 
 		// get list of valid nutrients
@@ -44,7 +44,7 @@ public class FFQCalculator {
 				weeklyTotals.put(nutrients[i], 0.0);
 				dailyAverages.put(nutrients[i], 0.0);
 			}
-			return new Result(questionnaireId, ageInMonths, userChoices, weeklyTotals, dailyAverages);
+			return new Result(questionnaireId, userId, ageInMonths, userChoices, weeklyTotals, dailyAverages);
 		}
 
 		NutrientList tbspSugar = nlService.getWithNutrientListID("suga");
@@ -205,7 +205,7 @@ public class FFQCalculator {
 			}
 		}
 
-		Result results = new Result(questionnaireId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages);
+		Result results = new Result(questionnaireId, userId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages);
 		//End of added code
 		//===============================================================
 		return results;
