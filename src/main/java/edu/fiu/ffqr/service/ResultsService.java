@@ -20,6 +20,10 @@ public class ResultsService {
 	public List<Result> getAll() {
 		return responsesRepository.findAll();
 	}
+
+	public List<Result> getResultsByUserId(String userId) {
+		return responsesRepository.findByUserId(userId);
+	}
 	
 	public Result create(Result results) {		
 		return responsesRepository.save(results);
