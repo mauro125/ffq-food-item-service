@@ -20,6 +20,10 @@ public class ResultsService {
 	public List<Result> getAll() {
 		return responsesRepository.findAll();
 	}
+
+	public List<Result> getResultsByParentId(String parentId) {
+		return responsesRepository.findByParentId(parentId);
+	}
 	
 	public Result create(Result results) {		
 		return responsesRepository.save(results);
