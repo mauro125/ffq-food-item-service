@@ -1,10 +1,8 @@
 package edu.fiu.ffqr.models;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.bson.types.ObjectId;
-import org.junit.Ignore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,7 +34,8 @@ public class Result {
 	@JsonProperty("dailyAverages")
 	Map<String, Double> dailyAverages = new HashMap<String, Double>();
 
-	public Result(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices, Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages){
+	public Result(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices, 
+					Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages){
 		
 		this.questionnaireId = questionnaireId;
 		this.userId = userId;

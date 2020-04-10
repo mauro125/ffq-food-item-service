@@ -3,7 +3,6 @@ package edu.fiu.ffqr.calculator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.*;
 
 import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.models.FoodItemInput;
@@ -162,7 +161,9 @@ public class FFQCalculator {
 					dailyAverages.put(nutrients[i], finalDailyValue);
 					weeklyTotals.put(nutrients[i], finalDailyValue * 7.00);		
 				}
-			} else {
+			} 
+			else 
+			{
 				throw new IllegalArgumentException("Frequency type must be day or week");
 			}
 		}
