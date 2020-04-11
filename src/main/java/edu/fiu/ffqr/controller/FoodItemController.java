@@ -294,10 +294,13 @@ public class FoodItemController {
   /*
    * Modified by Dariana Gonzalez (09/2019) to receive questionnaireId as parameter and save the results in the DB
    */
-  @PostMapping("/calculate/{questionnaireId}/{ageInMonths}") 
-  public Result calculateTotals(@PathVariable("questionnaireId") String questionnaireId, @PathVariable("ageInMonths") int ageInMonths, @RequestBody ArrayList<FoodItemInput> userChoices) {
+  @PostMapping("/calculate/{questionnaireId}/{ageInMonths}/{userID}") 
+  public Result calculateTotals(@PathVariable("questionnaireId") String questionnaireId, 
+								@PathVariable("ageInMonths") int ageInMonths, 
+								@PathVariable("userID") String userID, 
+								@RequestBody ArrayList<FoodItemInput> userChoices) {
 	  
-	  Result result = FFQCalculator.calculateTotals(questionnaireId, ageInMonths, userChoices, foodTypeService);
+	  Result result = FFQCalculator.calculateTotals(questionnaireId, userID, ageInMonths, userChoices, foodTypeService);
 	  resultsService.create(result);
 	  
 	  return result;

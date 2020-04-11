@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,12 @@ public class ResultController {
 	@GetMapping("/all")
 	public List<Result> getAllResults() throws JsonProcessingException {
 		List<Result> results = resultsService.getAll();
+		return results;
+	}
+
+	@GetMapping("/{userID}")
+	public List<Result> getResultsByUserId(@PathVariable("userID") String userId) throws JsonProcessingException {
+		List<Result> results = resultsService.getResultsByUserId(userId);
 		return results;
 	}
 }

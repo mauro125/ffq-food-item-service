@@ -14,15 +14,18 @@ public class Result {
 	
 	@Id
 	private ObjectId id;
+
+	@JsonProperty("questionnaireId")
+	private String questionnaireId; 
 	
+	@JsonProperty("userId")
+	private String userId;
+
 	@JsonProperty("patientName")
 	private String patientName;
 	
 	@JsonProperty("ageInMonths")
 	private int ageInMonths;
-
-	@JsonProperty("questionnaireId")
-	private String questionnaireId; 
 	
 	@JsonProperty("userChoices")
 	ArrayList<FoodItemInput> userChoices;
@@ -33,11 +36,12 @@ public class Result {
 	@JsonProperty("dailyAverages")
 	Map<String, Double> dailyAverages = new HashMap<String, Double>();
 
-	public Result(String questionnaireId, int ageInMonths, ArrayList<FoodItemInput> userChoices, Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages){
+	public Result(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices, Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages){
 		
-		this.patientName = "pending";
-		this.ageInMonths = ageInMonths;
 		this.questionnaireId = questionnaireId;
+		this.userId = userId;
+		this.patientName = "pending";
+		this.ageInMonths = ageInMonths;		
 		this.userChoices = userChoices;
 		this.weeklyTotals = weeklyTotals;
 		this.dailyAverages = dailyAverages;
@@ -49,6 +53,22 @@ public class Result {
 
 	public void setId(ObjectId id) {
 		this.id = id;
+	}
+
+	public String getQuestionnaireId() {
+		return questionnaireId;
+	}
+
+	public void setQuestionnaireId(String questionnaireId) {
+		this.questionnaireId = questionnaireId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getPatientName() {
@@ -65,14 +85,6 @@ public class Result {
 
 	public void setAgeInMonths(int ageInMonths) {
 		this.ageInMonths = ageInMonths;
-	}
-
-	public String getQuestionnaireId() {
-		return questionnaireId;
-	}
-
-	public void setQuestionnaireId(String questionnaireId) {
-		this.questionnaireId = questionnaireId;
 	}
 
 	public ArrayList<FoodItemInput> getUserChoices() {
