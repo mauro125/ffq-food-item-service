@@ -3,6 +3,7 @@ package edu.fiu.ffqr.calculator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.models.FoodItemInput;
 import edu.fiu.ffqr.models.NutrientList;
@@ -34,6 +35,7 @@ public class FFQCalculator {
 			NutrientListService nlService) {
 
 		// get list of valid nutrients
+		
 		String[] nutrients = ValidNutrientList.validNutrients;
 
 		Map<String, Double> weeklyTotals = new HashMap<String, Double>();
@@ -159,7 +161,9 @@ public class FFQCalculator {
 					dailyAverages.put(nutrients[i], finalDailyValue);
 					weeklyTotals.put(nutrients[i], finalDailyValue * 7.00);		
 				}
-			} else {
+			} 
+			else 
+			{
 				throw new IllegalArgumentException("Frequency type must be day or week");
 			}
 		}
@@ -229,7 +233,7 @@ public class FFQCalculator {
 		if(value >= 100){
 			newValue = (double)((int)value);
 		}  
-		else if(value >= 10){
+		else if((value >= 10)&&(value < 100)){
 			newValue = ((double)((int)(value*10)))/10.0;
 		}
 		else{

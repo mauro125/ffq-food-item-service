@@ -34,7 +34,7 @@ public class ResultController {
 		return results;
 	}
 
-	@GetMapping("/{userID}")
+	@GetMapping("/parent/{userID}")
 	public List<Result> getResultsByUserId(@PathVariable("userID") String userId) throws JsonProcessingException {
 		List<Result> results = resultsService.getResultsByUserId(userId);
 		return results;
