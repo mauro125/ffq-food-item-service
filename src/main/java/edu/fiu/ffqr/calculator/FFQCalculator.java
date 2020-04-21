@@ -57,7 +57,8 @@ public class FFQCalculator {
 
 		//for each food item that the user selected 
 		for (FoodItemInput foodItem: userChoices) {
-	
+
+			// Formula is calculated before breastmilk so we need to go through this first, if chosen.
 			if(foodItem.getNutrientListID().equalsIgnoreCase("form"))
 			{
 				//get amount of servings for item
@@ -76,6 +77,7 @@ public class FFQCalculator {
 			}
 		}
 
+		// breastMilkNeeded will always calculate the amount of breastmilk that is needed based on FFQ input.
 		breastMilkNeeded = calculateFormulaAndBreastMilk(ageInMonths, dailyFormulaServing);
 
 		//for each food item that the user selected 
@@ -145,7 +147,9 @@ public class FFQCalculator {
 					if (selectedFoodType.getNutrientListID().equalsIgnoreCase("brea"))
 					{
 						additionalIntake = nutrientValuePerServing * breastMilkNeeded;
-						if(foodItem.getFrequency() < 7)
+						// PO said that breastmilk calculations must be minimum 1 serving per day.
+						// This means that we should have 7 or more servings when choosing weekly intake. 
+						if(foodItem.getFrequency() < 7) 
 						{
 							additionalIntake = 0.0;
 						}
@@ -244,6 +248,17 @@ public class FFQCalculator {
 	//End of added code
 	//===================================================================================
 
+	/*
+	Method To Calculate Amount of Breast Milk needed based on Calculated amount of formula.
+	If an infant consumes at least breastmilk 1 per day and also formula, 
+	calculate volume of formula first and then subtract from the amount recommended for milk for that age.
+	Example: if 2 months old baby is consuming 700 ml (same as g) of formula and breastfed for 1 or more times per day, 
+	then the estimated volume from breastmilk will be about 31 ml since twoMonthInfantBreastMilkVolume = 731.0;
+	
+	@param ageInMonths: the age of the infant, which drives the amount of breastmilk originally required.
+	@param amountOfServings: the calculated amount of formula passed into the method.
+	@return Returns the positive amount of breastmilk still required, 0 otherwise.
+	*/
 	private static double calculateFormulaAndBreastMilk(int ageInMonths, double amountOfServings)
 	{
 		double servingsInMilliliters = amountOfServings * ouncesToMilliliter;
