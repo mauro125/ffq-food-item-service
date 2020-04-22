@@ -2,8 +2,6 @@ package edu.fiu.ffqr.controller;
 
 import java.util.List;
 
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.fiu.ffqr.models.FoodDescription;
 
-import edu.fiu.ffqr.service.ResultsService;
-import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.service.FFQFoodDescriptionService;
 
 @RestController
@@ -29,9 +25,6 @@ public class FoodDescriptionController {
     @Autowired
     private FFQFoodDescriptionService foodDescriptionService;
 
-    @Autowired
-    private ResultsService resultsService;
-
     public FoodDescriptionController() {}
 
     @GetMapping("/all")
@@ -39,32 +32,6 @@ public class FoodDescriptionController {
     {
         return foodDescriptionService.getAll();
     }
-
-    // @GetMapping("/{questionnaireID}")
-    // public FoodDescription foodGroupDescription(@PathVariable("questionnaireID") String questionnaireID) throws Exception
-    //  {
-    //      int infantAge = 0;
-
-    //      FoodDescription foodItemDescription = new FoodDescription();
-
-
-    //      // get results for given questionnaire
-    //      Result result = resultsService.getResultByQuestionnaireID(questionnaireID);
-
-    //      infantAge = result.getAgeInMonths();
-
-    //      foodItemDescription.getImageUrl();
-
-    //      if(infantAge < 6)
-    //      {
-    //          foodDescriptionService.findByDailyFoodIntake(foodItemDescription.getDailyFoodIntake());
-    //      }
-    //      foodItemDescription.getFoodItemGroupName();
-    //      foodItemDescription.getDailyFoodIntake();
-    //      foodItemDescription.getDescription();
-
-    //      return foodItemDescription;
-    // }
 
     @GetMapping("/{foodItemGroupName}")
     public FoodDescription collectionByFoodItemGroupName(@PathVariable("foodItemGroupName") String foodItemGroupName)
