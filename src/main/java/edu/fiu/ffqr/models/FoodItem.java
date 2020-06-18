@@ -26,12 +26,15 @@ public class FoodItem implements Serializable {
   private String nutrientId;
   @Field("portionSize")
   private String portionSize;
+  //Added by Teriq Douglas. A field for saving the position of the food item upon changing.
+  @Field("itemPosition")
+  private int itemPosition;
   
   
   // Constructors
   public FoodItem() {}
   
-  public FoodItem(String name, ArrayList<ServingOptions> servingsList,  ArrayList<FoodType> foodTypes, SugarSetting additionalSugar, boolean primary, String portionSize) {
+  public FoodItem(String name, ArrayList<ServingOptions> servingsList,  ArrayList<FoodType> foodTypes, SugarSetting additionalSugar, boolean primary, String portionSize, int itemPosition) {
 	    this._id = new ObjectId();
 	    this.name = name;
 	    
@@ -48,6 +51,7 @@ public class FoodItem implements Serializable {
 	    this.foodTypes = foodTypes;
 	    this.primary = primary;
 	    this.portionSize = portionSize;
+	    this.itemPosition = itemPosition;
   }
   
   /*public FoodItem(String name, ArrayList<ServingOptions> servings, ArrayList<FoodType> foodTypes, String portionSize) {
@@ -197,4 +201,8 @@ public class FoodItem implements Serializable {
   public void setPortionSize(String portionSize) {
 		this.portionSize = portionSize;
   }
+
+  public void setItemPosition(int itemPosition) { this.itemPosition = itemPosition; }
+
+  public int getItemPosition() { return itemPosition; }
 }

@@ -159,8 +159,8 @@ public class FoodItemController {
 	  }
 	  
 	  
-	  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.isPrimary(), newItem.getPortionSize());
-	  foodItemService.create(fi);  
+	  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.isPrimary(), newItem.getPortionSize(), newItem.getItemPosition());
+	  foodItemService.create(fi);
 	
 	  
 	  return fi;
