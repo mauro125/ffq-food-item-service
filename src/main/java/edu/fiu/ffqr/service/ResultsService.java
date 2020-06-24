@@ -32,4 +32,8 @@ public class ResultsService {
     public Result getResultByQuestionnaireID(String questionnaireID) {
     	return responsesRepository.findByQuestionnaireId(questionnaireID);
     }
+
+	public Result update(Result updatedItem) {
+		return responsesRepository.save(updatedItem);
+	}
 }

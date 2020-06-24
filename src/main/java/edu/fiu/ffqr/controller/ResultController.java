@@ -3,11 +3,7 @@ package edu.fiu.ffqr.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -19,7 +15,7 @@ import edu.fiu.ffqr.service.ResultsService;
  * Created: 09/2019
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/results")
 public class ResultController {
 	
@@ -38,5 +34,30 @@ public class ResultController {
 	public List<Result> getResultsByUserId(@PathVariable("userID") String userId) throws JsonProcessingException {
 		List<Result> results = resultsService.getResultsByUserId(userId);
 		return results;
+	}
+
+	@PutMapping("/update")
+	public Result update(@RequestBody Result data) {
+
+		System.out.println(data.toString());
+
+		String id = data.getQuestionnaireId();
+
+		if (null == id) {
+			throw new IllegalArgumentException("Missing questionnaireID");
+		}
+
+		Result questionnaireResult = resultsService.getResultByQuestionnaireID(id);
+		if (null == questionnaireResult) {
+			throw new IllegalArgumentException("Invalid questionnaireID");
+		}
+
+		if(data.getFeedback() != null) {
+			questionnaireResult.setFeedback(data.getFeedback());
+		}
+
+		resultsService.update(questionnaireResult);
+
+		return questionnaireResult;
 	}
 }

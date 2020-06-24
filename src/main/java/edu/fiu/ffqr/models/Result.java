@@ -21,6 +21,9 @@ public class Result {
 
 	@JsonProperty("patientName")
 	private String patientName;
+
+	@JsonProperty("feedback")
+	private String feedback;
 	
 	@JsonProperty("ageInMonths")
 	private int ageInMonths;
@@ -35,7 +38,7 @@ public class Result {
 	Map<String, Double> dailyAverages = new HashMap<String, Double>();
 
 	public Result(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices, 
-					Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages){
+					Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages, String feedback){
 		
 		this.questionnaireId = questionnaireId;
 		this.userId = userId;
@@ -44,6 +47,7 @@ public class Result {
 		this.userChoices = userChoices;
 		this.weeklyTotals = weeklyTotals;
 		this.dailyAverages = dailyAverages;
+		this.feedback = feedback;
 	}
 	
 	public ObjectId getId() {
@@ -108,5 +112,13 @@ public class Result {
 
 	public void setDailyAverages(Map<String, Double> dailyAverages) {
 		this.dailyAverages = dailyAverages;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
+	public String getFeedback() {
+		return feedback;
 	}
 }

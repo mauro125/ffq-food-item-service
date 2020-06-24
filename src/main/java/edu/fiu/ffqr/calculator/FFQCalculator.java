@@ -46,7 +46,7 @@ public class FFQCalculator {
 				weeklyTotals.put(nutrients[i], 0.0);
 				dailyAverages.put(nutrients[i], 0.0);
 			}
-			return new Result(questionnaireId, userId, ageInMonths, userChoices, weeklyTotals, dailyAverages);
+			return new Result(questionnaireId, userId, ageInMonths, userChoices, weeklyTotals, dailyAverages, null);
 		}
 
 		NutrientList tbspSugar = nlService.getWithNutrientListID("suga");
@@ -213,7 +213,7 @@ public class FFQCalculator {
 			}
 		}
 
-		Result results = new Result(questionnaireId, userId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages);
+		Result results = new Result(questionnaireId, userId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages, null);
 		//End of added code
 		//===============================================================
 		return results;
