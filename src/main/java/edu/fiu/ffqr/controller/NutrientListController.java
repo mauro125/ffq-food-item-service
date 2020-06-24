@@ -19,7 +19,7 @@ import edu.fiu.ffqr.models.NutrientList;
 import edu.fiu.ffqr.service.NutrientListService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/nutrients")
 public class NutrientListController {
 			

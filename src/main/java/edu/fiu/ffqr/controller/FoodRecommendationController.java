@@ -34,7 +34,7 @@ import edu.fiu.ffqr.service.SysFoodItemRecommendationService;
  * Created: 11/2019
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/foodrecommendations")
 public class FoodRecommendationController {
 

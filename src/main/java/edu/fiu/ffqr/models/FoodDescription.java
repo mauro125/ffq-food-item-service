@@ -87,4 +87,8 @@ public class FoodDescription implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String get_id() { 
+		return _id.toHexString();
+	}
 }
