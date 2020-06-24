@@ -9,16 +9,18 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.bson.types.ObjectId;
 
 import edu.fiu.ffqr.models.FoodDescription;
 
 import edu.fiu.ffqr.service.FFQFoodDescriptionService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/fooddescription")
 public class FoodDescriptionController {
 
@@ -48,6 +50,44 @@ public class FoodDescriptionController {
 		}
 		else
 			return foodDescriptionService.create(foodDescription);
+    }
+
+    @PutMapping("/update/{id}")
+	public FoodDescription updateFoodDescription(@PathVariable ObjectId id, @RequestBody FoodDescription data) throws JsonProcessingException {
+		
+        FoodDescription fdItem = foodDescriptionService.findById(id);
+
+        if (null == fdItem) {
+            throw new IllegalArgumentException("The food description id does not exist");
+        }
+	
+        if (data.getImageUrl() != null) {
+            fdItem.setImageUrl(data.getImageUrl());
+        }
+
+        if (data.getFoodItemGroupName() != null) {
+            fdItem.setFoodItemGroupName(data.getFoodItemGroupName());
+        }
+
+        if (data.getFirstBracketIntake() != null) {
+            fdItem.setFirstBracketIntake(data.getFirstBracketIntake());
+        }
+
+        if (data.getSecondBracketIntake() != null) {
+            fdItem.setSecondBracketIntake(data.getSecondBracketIntake());
+        }
+
+        if (data.getThirdBracketIntake() != null) {
+            fdItem.setThirdBracketIntake(data.getThirdBracketIntake());
+        }
+
+        if (data.getDescription() != null) {
+            fdItem.setDescription(data.getDescription());
+        }
+
+        foodDescriptionService.update(fdItem);
+
+        return fdItem;
     }
 
 }

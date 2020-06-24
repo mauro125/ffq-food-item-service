@@ -1,4 +1,4 @@
-#FFQFoodEntryService
+# FFQFoodEntryService
 
 This service will serve as a backing store for the food items that will populate the Food Frequency Questionnaire. 
 
@@ -11,7 +11,7 @@ This service will serve as a backing store for the food items that will populate
 >Load database on startup
 - Start the application with the following args: 
 - -Dmongo.fooditems.load="true"
-- ie) ``mvn spring-boot:run -Dmongo.fooditems.load="true"``
+- ie) ``mvn spring-boot:run -Dspring-boot.run.arguments="--mongo.fooditems.load=true"``
 
 >Database Information
 - Database name: **ffq_database**
@@ -63,7 +63,36 @@ POST calls
     {"name":"Milk with chocolate/strawberry or vanilla (include frozen beverages, shakes, hot chocolate, etc.)", "frequency":2, "frequencyType":"day", "nutrientListID":"milkchoc", "serving":"4 OZ or less", "sugar":5}, 
     {"name":"Bread refined", "frequency":3, "frequencyType":"WEEK", "nutrientListID":"brearef", "serving":"0.75 piece", "sugar":0}]
 
+>FoodDescription API
 
+GET calls
+- Get all Food Descriptions: **/fooddescription/all**
+- Get Food Descriptions for a food item group: **/fooddescription/{foodItemGroup}**
+
+POST calls
+- Create a Food Description item: **/fooddescription/create/**
+    The request body includes all of the fields found in a Food Description item. Ex:
+    {
+        "foodItemGroupName": "Breastmilk - Formula - Cow's Milk - Other",
+        "firstBracketIntake": "16 - 24 fl oz / day",
+        "secondBracketIntake": "10 - 28 fl oz / day",
+        "thirdBracketIntake": "8 - 18 fl oz / day",
+        "description": "Breastmilk or iron-fortified infant formula is recommended until age 12 months. Do not use low-iron milk, such as cow or soy, even in infant cereal. Do not serve 1% (low-fat) or skim (non-fat) milks before age 24 months.",
+        "imageUrl": "/assets/images/Breastmilk.jpg"
+    }
+
+PUT calls
+- Update a Food Description item: **/fooddescription/update/{id}**
+    URL parameter 'id' is the item id as hexadecimal. Ex: 5ef3aff74f9ed93eafcd3f50
+    The request body can include any or all of the fields found in a Food Description item. Ex:
+    {
+        "foodItemGroupName": "Breastmilk - Formula - Cow's Milk - Other",
+        "firstBracketIntake": "16 - 24 fl oz / day",
+        "secondBracketIntake": "10 - 28 fl oz / day",
+        "thirdBracketIntake": "8 - 18 fl oz / day",
+        "description": "Breastmilk or iron-fortified infant formula is recommended until age 12 months. Do not use low-iron milk, such as cow or soy, even in infant cereal. Do not serve 1% (low-fat) or skim (non-fat) milks before age 24 months.",
+        "imageUrl": "/assets/images/Breastmilk.jpg"
+    }
 
 >Loading nutrient values from excel file to nutrient list collection in mongo
 1) The NutrientDatabase.xlsx file is in the root folder. Make sure the data in all columns is correct,

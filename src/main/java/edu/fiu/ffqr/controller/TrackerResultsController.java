@@ -17,7 +17,7 @@ import edu.fiu.ffqr.models.TrackerResult;
 import edu.fiu.ffqr.service.TrackerResultsService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/tracker")
 public class TrackerResultsController {
 	

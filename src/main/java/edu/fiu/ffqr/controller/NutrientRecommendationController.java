@@ -26,7 +26,7 @@ import edu.fiu.ffqr.service.SysNutrientRecommendationService;
  * Created: 10/2019
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/nutrientsrecommendations")
 public class NutrientRecommendationController {
 
