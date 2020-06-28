@@ -22,7 +22,7 @@ This service will serve as a backing store for the food items that will populate
 
 GET calls
 - Get all food items: **/fooditems**
-- Get individual item by name: **/{name}**    (Currently case sensitive)
+__- Get individual item by name: **/{name}**    (Currently case sensitive)
 - Get item by its nutrientListID: **/getByID/{nutrientListID}** 
 
 POST calls
