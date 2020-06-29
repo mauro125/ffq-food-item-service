@@ -71,5 +71,8 @@ public class FFQFoodEntryService {
 		FoodItem fi = foodRepository.getFoodItemBy_id(id);
 		foodRepository.delete(fi);
 	}
-	
+
+	public FoodItem update(FoodItem item) {
+		return foodRepository.save(item);
+	}
 }

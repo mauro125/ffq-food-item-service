@@ -159,13 +159,31 @@ public class FoodItemController {
 	  }
 	  
 	  
-	  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.isPrimary(), newItem.getPortionSize());
-	  foodItemService.create(fi);  
+	  fi = new FoodItem(newItem.getName(), newItem.getServingsList(), newItem.getFoodTypes(), newItem.getAdditionalSugar(), newItem.isPrimary(), newItem.getPortionSize(), newItem.getItemPosition());
+	  foodItemService.create(fi);
 	
 	  
 	  return fi;
   }
-  
+
+	@PutMapping("/update")
+	public FoodItem updateItemPosition(@PathVariable ObjectId id, @RequestBody FoodItem position) throws JsonProcessingException {
+
+		FoodItem foodItem = foodItemService.getFoodItemBy_id(id);
+
+		if (null == foodItem) {
+			throw new IllegalArgumentException("The food item id does not exist");
+		}
+
+
+		foodItem.setItemPosition(position.getItemPosition());
+
+
+		foodItemService.update(foodItem);
+
+		return foodItem;
+	}
+
   @PostMapping("/createMany")
   public List<FoodItem> create(@RequestBody ArrayList<FoodItem> data) {
 	  for (FoodItem newItem: data) {
@@ -267,5 +285,6 @@ public class FoodItemController {
 	  
 	  return result;
   }
-  
+
+
 }

@@ -188,7 +188,8 @@ public class DataLoader {
 			e.printStackTrace();
 		}
 			
-		System.out.println("...Loading complete!");	
+		System.out.println("...Loading complete!");
+		
 	}
 
 	
