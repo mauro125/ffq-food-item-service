@@ -166,7 +166,7 @@ public class FoodItemController {
 	  return fi;
   }
 
-	@PutMapping("/update")
+	@PutMapping("/update/{id}")
 	public FoodItem updateItemPosition(@PathVariable ObjectId id, @RequestBody FoodItem position) throws JsonProcessingException {
 
 		FoodItem foodItem = foodItemService.getFoodItemBy_id(id);
