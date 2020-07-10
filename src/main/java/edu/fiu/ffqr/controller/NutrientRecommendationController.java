@@ -45,67 +45,155 @@ public class NutrientRecommendationController {
 		return SysNutrientsRecommendations;		
 	}
 	
+//	@GetMapping("/calculate/{questionnaireID}")
+//	  public NutrientRecommendation calculateNutrientsRecommendations(@PathVariable("questionnaireID") String questionnaireID) throws Exception {
+//
+//		String ageRange = "";
+//		String status = "";
+//
+//		Result result = resultsService.getResultByQuestionnaireID(questionnaireID);
+//		int patientAge = result.getAgeInMonths();
+//		String patientName = result.getPatientName();
+//		Map<String, Double> map = result.getDailyAverages();
+//
+//		// get list of nutrients recommendations by age
+//		List<SysNutrientRecommendation> SysNutrientsRecommendations = SysNutRecomService.getAll();
+//
+//		if(patientAge >= 0 && patientAge <= 6)
+//		{
+//			ageRange = "0-6";
+//		}
+//		else if(patientAge >= 7 && patientAge <= 12)
+//		{
+//			ageRange = "7-12";
+//		}
+//		else if(patientAge >= 13 && patientAge <= 24)
+//		{
+//			ageRange = "13-24";
+//		}
+//		else
+//			throw new Exception("There are no recommendations available for infants of age over 24 months");
+//
+//		NutrientRecommendation nRecommendation = new NutrientRecommendation();
+//		nRecommendation.setPatientAgeInMonths(patientAge);
+//		nRecommendation.setPatientName(patientName);
+//		nRecommendation.setQuestionnaireId(questionnaireID);
+//
+//		for (SysNutrientRecommendation n: SysNutrientsRecommendations) {
+//
+//			double calculatedValue = map.get(n.getNutrientName());
+//			double recommendedValue = n.getEstimatedAverageByAge().get(ageRange);
+//			double percentageOfRecommended = Math.round((calculatedValue * 100 / recommendedValue)  * 100.0 ) / 100.0;
+//
+//			if(calculatedValue < recommendedValue - (recommendedValue * 0.10)) {
+//				System.out.println(calculatedValue);
+//				System.out.println(recommendedValue);
+//				status = "Below (" + percentageOfRecommended + "%)";
+//			}
+//			else if(calculatedValue > recommendedValue + (recommendedValue * 0.10)) {
+//				status = "Above (" + percentageOfRecommended + "%)";
+//			}
+//			else
+//				status = "Normal (" + percentageOfRecommended + "%)";
+//
+//			Recommendation recommedation = new Recommendation();
+//			recommedation.setCalculatedAmount(calculatedValue);
+//			recommedation.setRecommendedAmount(recommendedValue);
+//			recommedation.setNutrientName(n.getNutrientName());
+//			recommedation.setStatus(status);
+//
+//			nRecommendation.getRecommendationsList().add(recommedation);
+//		}
+//
+//		return nRecommendation;
+//	}
+
 	@GetMapping("/calculate/{questionnaireID}")
-	  public NutrientRecommendation calculateNutrientsRecommendations(@PathVariable("questionnaireID") String questionnaireID) throws Exception {
-		
-		String ageRange = "";
-		String status = "";
-		
+	public NutrientRecommendation calculateNutrientsRecommendations(@PathVariable("questionnaireID") String questionnaireID) throws Exception {
+
+		String ageRange;
+		String status;
+
 		Result result = resultsService.getResultByQuestionnaireID(questionnaireID);
 		int patientAge = result.getAgeInMonths();
 		String patientName = result.getPatientName();
 		Map<String, Double> map = result.getDailyAverages();
-		
-		// get list of nutrients recommendations by age
+
 		List<SysNutrientRecommendation> SysNutrientsRecommendations = SysNutRecomService.getAll();
-		
-		if(patientAge >= 0 && patientAge <= 6)
+//
+		if((patientAge >= 0) && (patientAge <= 6))
 		{
 			ageRange = "0-6";
 		}
-		else if(patientAge >= 7 && patientAge <= 12)
+		else if((patientAge >= 7) && (patientAge <= 12))
 		{
 			ageRange = "7-12";
 		}
-		else if(patientAge >= 13 && patientAge <= 24)
+		else if((patientAge >= 13) && (patientAge <= 24))
 		{
 			ageRange = "13-24";
 		}
-		else
-			throw new Exception("There are no recommendations available for infants of age over 24 months");	
-		
-		NutrientRecommendation nRecommendation = new NutrientRecommendation();		
-		nRecommendation.setPatientAgeInMonths(patientAge);
-		nRecommendation.setPatientName(patientName);
-		nRecommendation.setQuestionnaireId(questionnaireID);
+		else {
+			throw new Exception("There are no recommendations available for infants of age over 24 months");
+		}
 
-		for (SysNutrientRecommendation n: SysNutrientsRecommendations) {
-			
-			double calculatedValue = map.get(n.getNutrientName());
+		NutrientRecommendation nutrientRecommendation = new NutrientRecommendation();
+		nutrientRecommendation.setPatientAgeInMonths(patientAge);
+		nutrientRecommendation.setPatientName(patientName);
+		nutrientRecommendation.setQuestionnaireId(questionnaireID);
+
+		for(int i = 0; i < SysNutrientsRecommendations.size(); i++){
+			SysNutrientRecommendation n = SysNutrientsRecommendations.get(i);
+
+			String nutrientName = n.getNutrientName();
 			double recommendedValue = n.getEstimatedAverageByAge().get(ageRange);
-			double percentageOfRecommended = Math.round((calculatedValue * 100 / recommendedValue)  * 100.0 ) / 100.0;
-			
-			if(calculatedValue < recommendedValue - (recommendedValue * 0.10)) {
+
+
+			Recommendation testRecom = new Recommendation();
+			testRecom.setNutrientName(nutrientName);
+			testRecom.setRecommendedAmount(recommendedValue);
+			double calculatedValue;
+			double percentageOfRecommended;
+			try {
+				calculatedValue = map.get(nutrientName);
+				testRecom.setCalculatedAmount(calculatedValue);
+				percentageOfRecommended = Math.round((calculatedValue * 100.0 / recommendedValue)  * 100.0 ) / 100.0;
+			} catch(Exception e){
+				calculatedValue = 0;
+				testRecom.setCalculatedAmount(calculatedValue);
+				percentageOfRecommended = 0;
+			}
+
+			if(calculatedValue < (recommendedValue - (recommendedValue * 0.10))) {
 				System.out.println(calculatedValue);
 				System.out.println(recommendedValue);
-				status = "Below (" + percentageOfRecommended + "%)";
+//				status = "Below (" + percentageOfRecommended + "%)";
+				status = "Below (";
+				status = status.concat(Double.toString(percentageOfRecommended));
+				status = status.concat("%)");
 			}
-			else if(calculatedValue > recommendedValue + (recommendedValue * 0.10)) {
-				status = "Above (" + percentageOfRecommended + "%)";
+			else if(calculatedValue > (recommendedValue + (recommendedValue * 0.10))) {
+//				status = "Above (" + percentageOfRecommended + "%)";
+				status = "Above (";
+				status = status.concat(Double.toString(percentageOfRecommended));
+				status = status.concat("%)");
 			}
-			else
-				status = "Normal (" + percentageOfRecommended + "%)";
-			
-			Recommendation recommedation = new Recommendation();
-			recommedation.setCalculatedAmount(calculatedValue);
-			recommedation.setRecommendedAmount(recommendedValue);
-			recommedation.setNutrientName(n.getNutrientName());
-			recommedation.setStatus(status);
-			
-			nRecommendation.getRecommendationsList().add(recommedation);
+			else {
+//				status = "Normal (" + percentageOfRecommended + "%)";
+				status = "Normal (";
+				status = status.concat(Double.toString(percentageOfRecommended));
+				status = status.concat("%)");
+			}
+
+
+			testRecom.setStatus(status);
+
+			List<Recommendation> tempList = nutrientRecommendation.getRecommendationsList();
+			tempList.add(testRecom);
+			nutrientRecommendation.setRecommendationsList(tempList);
 		}
-		
-		return nRecommendation;
+
+		return nutrientRecommendation;
 	}
 	
 	@PostMapping("/create")
