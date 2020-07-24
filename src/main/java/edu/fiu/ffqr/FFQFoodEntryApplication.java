@@ -30,19 +30,17 @@ public class FFQFoodEntryApplication {
 		if (loadDataArg.equalsIgnoreCase("true")) {
 			DataLoader loader = (DataLoader)ctx.getBean(DataLoader.class);
 			loader.load();
-		}
-		
-		DataLoader loader = (DataLoader)ctx.getBean(DataLoader.class);
-		
-		// Added by Dariana Gonzalez 10/25/2019
-		// Load list of system nutrients recommendations
-		loader.loadSysNutrientsRecommendations();
-		
-		// Added by Dariana Gonzalez 10/25/2019
-	    // Load list of system food items recommendations
-		loader.loadSysFoodItemsRecommendations();
 
-		loader.loadFoodDescription();
+			// Added by Dariana Gonzalez 10/25/2019
+			// Load list of system nutrients recommendations
+			loader.loadSysNutrientsRecommendations();
+			
+			// Added by Dariana Gonzalez 10/25/2019
+			// Load list of system food items recommendations
+			loader.loadSysFoodItemsRecommendations();
+
+			loader.loadFoodDescription();
+		}
 	}
 	
 	@Bean
