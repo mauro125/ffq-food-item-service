@@ -13,8 +13,8 @@ public class QuestionnaireResultNutrientsList {
     
     public static String[] nutrientsList = {
         "Energy (kcal)",
-        "Total Protein (g)",
-        "Total Carbohydrate (g)",
+        "Protein (g)",
+        "CHO (g)",
         "Total Fat (g)",
         "% Calories from Protein",
         "% Calories from Carbs",
@@ -39,9 +39,9 @@ public class QuestionnaireResultNutrientsList {
         "Thiamin (vitamin B1) (mg)",
         "Riboflavin (vitamin B2) (mg)",
         "Niacin (vitamin B3) (mg)",
-        "Pantothenic Acid (vitamin B5) (mg)",
+        "Vitamin B5 (Pantothenic acid) (mg)",
         "Vitamin B-6 (pyridoxine, pyridoxyl, & pyridoxamine) (mg)",
-        "Total Folate (vitamin B9) (mcg)",
+        "Vitamin B9 (Folate) (mcg)",
         "Vitamin B-12 (cobalamin) (mcg)",
         "Vitamin C (ascorbic acid) (mg)",
         "Total Vitamin A Activity (Retinol Activity Equivalents) (mcg)",
