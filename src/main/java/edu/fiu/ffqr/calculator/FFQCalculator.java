@@ -181,13 +181,13 @@ public class FFQCalculator {
 		dailyAverages.put("% Calories from Fat", weeklyTotals.get("% Calories from Fat"));
 		
 		//% calories from protein
-		double caloriesFromProteinWeekly = weeklyTotals.get("Protein (g)") * 4;
+		double caloriesFromProteinWeekly = weeklyTotals.get("Total Protein (g)") * 4;
 		double percentageCalFromProteinWeekly = caloriesFromProteinWeekly * 100 / weeklyTotals.get("Energy (kcal)");
 		weeklyTotals.put("% Calories from Protein", percentageCalFromProteinWeekly);
 		dailyAverages.put("% Calories from Protein", weeklyTotals.get("% Calories from Protein"));
 				
 		//% calories from carbs
-		double caloriesFromCarbsWeekly = weeklyTotals.get("CHO (g)") * 4;
+		double caloriesFromCarbsWeekly = weeklyTotals.get("Total Carbohydrate (g)") * 4;
 		double percentageCalFromCarbsWeekly = caloriesFromCarbsWeekly * 100 / weeklyTotals.get("Energy (kcal)");
 		weeklyTotals.put("% Calories from Carbs", percentageCalFromCarbsWeekly);
 		dailyAverages.put("% Calories from Carbs", weeklyTotals.get("% Calories from Carbs"));
