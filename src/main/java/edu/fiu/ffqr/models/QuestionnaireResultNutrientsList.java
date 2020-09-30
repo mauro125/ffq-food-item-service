@@ -14,7 +14,7 @@ public class QuestionnaireResultNutrientsList {
     public static String[] nutrientsList = {
         "Energy (kcal)",
         "Total Protein (g)",
-        "Total Carbohydrate (g)",
+        "CHO (g)",
         "Total Fat (g)",
         "% Calories from Protein",
         "% Calories from Carbs",

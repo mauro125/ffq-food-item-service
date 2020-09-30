@@ -10,7 +10,7 @@ public class ValidNutrientList {
 			"Total Grams",
 			"Energy (kcal)",
 			"Total Fat (g)",
-			"Total Carbohydrate (g)",
+			"CHO (g)",
 			"Total Protein (g)",
 			"Animal Protein (g)",
 			"Vegetable Protein (g)",
