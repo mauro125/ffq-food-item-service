@@ -1,7 +1,7 @@
 [
     { "nutrientName": "Energy (kcal)", "estimatedAverageByAge": { "13-24": 1.0, "0-6": 1.0, "7-12": 1.0 } },
     { "nutrientName": "Total Protein (g)", "estimatedAverageByAge": { "13-24": 13.0, "0-6": 9.1, "7-12": 11.0 } },
-    { "nutrientName": "Total Carbohydrate (g)", "estimatedAverageByAge": { "13-24": 130.0, "0-6": 60.0, "7-12": 95.0 } },
+    { "nutrientName": "CHO (g)", "estimatedAverageByAge": { "13-24": 130.0, "0-6": 60.0, "7-12": 95.0 } },
     { "nutrientName": "Total Fat (g)", "estimatedAverageByAge": { "13-24": 19.0, "0-6": 31.0, "7-12": 30.0 } },
     { "nutrientName": "Total Vitamin A Activity (Retinol Activity Equivalents) (mcg)", "estimatedAverageByAge": { "0-6": 400, "7-12": 500, "13-24": 210 } },
     { "nutrientName": "Vitamin D (calciferol) (mcg)", "estimatedAverageByAge": { "0-6": 10, "7-12": 10, "13-24": 10 } },
