@@ -19,6 +19,8 @@ public class FoodRecommendation implements Serializable {
 	int patientAgeInMonths;	
 	@JsonProperty("foodCategoryRecList")
 	List <FoodCategoryRecommendation> foodCategoryRecList;
+	@JsonProperty("gender")
+	String gender;
 	
 	public FoodRecommendation() {
 		foodCategoryRecList = new ArrayList<>();
@@ -46,6 +48,14 @@ public class FoodRecommendation implements Serializable {
 
 	public void setPatientAgeInMonths(int patientAgeInMonths) {
 		this.patientAgeInMonths = patientAgeInMonths;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public List<FoodCategoryRecommendation> getFoodCategoryRecList() {
