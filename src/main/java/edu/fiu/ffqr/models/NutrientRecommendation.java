@@ -42,7 +42,7 @@ public class NutrientRecommendation implements Serializable {
 	}
 
 	public String getGender() {
-		return patientName;
+		return gender;
 	}
 
 	public void setGender(String gender) {
