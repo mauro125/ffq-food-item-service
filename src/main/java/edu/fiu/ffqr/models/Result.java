@@ -1,4 +1,5 @@
 package edu.fiu.ffqr.models;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,15 +8,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Document(collection="results")
+@Document(collection = "results")
 public class Result {
-	
+
 	@Id
 	private ObjectId id;
 
 	@JsonProperty("questionnaireId")
-	private String questionnaireId; 
-	
+	private String questionnaireId;
+
 	@JsonProperty("userId")
 	private String userId;
 
@@ -24,32 +25,36 @@ public class Result {
 
 	@JsonProperty("feedback")
 	private String feedback;
-	
+
 	@JsonProperty("ageInMonths")
 	private int ageInMonths;
-	
+
+	@JsonProperty("gender")
+	private String gender;
+
 	@JsonProperty("userChoices")
 	ArrayList<FoodItemInput> userChoices;
-	
+
 	@JsonProperty("weeklyTotals")
 	Map<String, Double> weeklyTotals = new HashMap<String, Double>();
-	
+
 	@JsonProperty("dailyAverages")
 	Map<String, Double> dailyAverages = new HashMap<String, Double>();
 
-	public Result(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices, 
-					Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages, String feedback){
-		
+	public Result(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices,
+			Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages, String feedback, String gender) {
+
 		this.questionnaireId = questionnaireId;
 		this.userId = userId;
 		this.patientName = "pending";
-		this.ageInMonths = ageInMonths;		
+		this.ageInMonths = ageInMonths;
 		this.userChoices = userChoices;
 		this.weeklyTotals = weeklyTotals;
 		this.dailyAverages = dailyAverages;
 		this.feedback = feedback;
+		this.gender = gender;
 	}
-	
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -88,6 +93,14 @@ public class Result {
 
 	public void setAgeInMonths(int ageInMonths) {
 		this.ageInMonths = ageInMonths;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public ArrayList<FoodItemInput> getUserChoices() {

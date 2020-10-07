@@ -32,7 +32,7 @@ public class FFQCalculator {
 
 	//Khalid Alamoudi - Added total calories to the parameters and return
 	public static Result calculateTotals(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices,
-			NutrientListService nlService) {
+			NutrientListService nlService, String gender) {
 
 		// get list of valid nutrients
 		
@@ -46,7 +46,7 @@ public class FFQCalculator {
 				weeklyTotals.put(nutrients[i], 0.0);
 				dailyAverages.put(nutrients[i], 0.0);
 			}
-			return new Result(questionnaireId, userId, ageInMonths, userChoices, weeklyTotals, dailyAverages, null);
+			return new Result(questionnaireId, userId, ageInMonths, userChoices, weeklyTotals, dailyAverages, null, gender);
 		}
 
 		NutrientList tbspSugar = nlService.getWithNutrientListID("suga");
@@ -213,7 +213,7 @@ public class FFQCalculator {
 			}
 		}
 
-		Result results = new Result(questionnaireId, userId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages, null);
+		Result results = new Result(questionnaireId, userId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages, null, gender);
 		//End of added code
 		//===============================================================
 		return results;

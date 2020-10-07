@@ -67,6 +67,7 @@ public class FoodRecommendationController {
 		String nutrientListID = "";
 		String category = "";
 		int infantAge = 0;
+		String gender = "";
 		String ageRange = "";
 		Double calculatedAmount = 0.0;		
 		Map<String, Double> categoryValueMap = new HashMap<String, Double>();
@@ -75,6 +76,7 @@ public class FoodRecommendationController {
 		Result result = resultsService.getResultByQuestionnaireID(questionnaireID);
 		
 		infantAge = result.getAgeInMonths();
+		gender = result.getGender();
 		ArrayList<FoodItemInput> userChoices = result.getUserChoices();
 		
 		// instantiate Food Item Recommendation object
@@ -83,6 +85,7 @@ public class FoodRecommendationController {
 		foodItemRecommendation.setQuestionnaireId(questionnaireID);
 		foodItemRecommendation.setPatientAgeInMonths(infantAge);
 		foodItemRecommendation.setPatientName("pending"); // patient name still no defined in the application
+		foodItemRecommendation.setGender(gender);
 			
 		// get list of food items recommendations by age
 		List<SysFoodRecommendation> SysFoodItemRecommendations = SysFoodItemRecomService.getAll();
