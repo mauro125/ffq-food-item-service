@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>edu.fiu</groupId>
-	<artifactId>ffq-food-entry-service</artifactId>
+	<artifactId>ffq-food-item-service</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<name>FFQ Food Item Service</name>
 	<description>Service for accessing FFQ food entries to populate questionnaire.</description>
