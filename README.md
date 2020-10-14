@@ -51,11 +51,11 @@ GET calls
 POST calls
 - Create a single item: **/create**
     In the request body, pass one NutrientList object in a JSON payload:
-    {"nutrientListID":"wate", "nutrientMap":{"Total Grams":7.6, "Total Fat (g)":2.4}}
+    {"nutrientListID":"wate", "nutrientMap":{"Total Grams":7.6, "Fat (g)":2.4}}
 - Create multiple items: **/createMany**
     In the request body, pass multiple NutrientList objects in a JSON payload:
-    [{"nutrientListID":"wate", "nutrientMap":{"Total Grams":7.6, "Total Fat (g)":2.4}},
-    {"nutrientListID":"brea", "nutrientMap":{"Total Grams":2, "Total Fat (g)":1.4}}]
+    [{"nutrientListID":"wate", "nutrientMap":{"Total Grams":7.6, "Fat (g)":2.4}},
+    {"nutrientListID":"brea", "nutrientMap":{"Total Grams":2, "Fat (g)":1.4}}]
 - Calculate nutrient values: **/calculate**
     In the request body, pass an arraylist of FoodItemInput objects.
     Example payload:
