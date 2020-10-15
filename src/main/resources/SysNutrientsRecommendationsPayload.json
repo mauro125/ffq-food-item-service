@@ -6,7 +6,7 @@
     { "nutrientName": "Vitamin A (Retinol) (mcg)", "estimatedAverageByAge": { "0-6": 400, "7-12": 500, "13-24": 210 } },
     { "nutrientName": "Vitamin D (mcg)", "estimatedAverageByAge": { "0-6": 10, "7-12": 10, "13-24": 10 } },
     { "nutrientName": "Vitamin E (mg)", "estimatedAverageByAge": { "0-6": 4, "7-12": 5, "13-24": 5 } },
-    { "nutrientName": "Vitamin K (mcg) ", "estimatedAverageByAge": { "0-6": 2, "7-12": 2.5, "13-24": 30 } },
+    { "nutrientName": "Vitamin K (mcg)", "estimatedAverageByAge": { "0-6": 2, "7-12": 2.5, "13-24": 30 } },
     { "nutrientName": "Vitamin C (Ascorbic acid) (mg)", "estimatedAverageByAge": { "0-6": 40, "7-12": 50, "13-24": 15 } },
     { "nutrientName": "Vitamin B1 (Thiamin) (mg)", "estimatedAverageByAge": { "0-6": 0.2, "7-12": 0.3, "13-24": 0.4 } },
     { "nutrientName": "Vitamin B2 (Riboflavin) (mg)", "estimatedAverageByAge": { "0-6": 0.3, "7-12": 0.4, "13-24": 0.4 } },

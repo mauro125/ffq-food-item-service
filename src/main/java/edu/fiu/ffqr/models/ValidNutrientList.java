@@ -39,7 +39,7 @@ public class ValidNutrientList {
 			"Beta-Tocopherol (mg)",
 			"Gamma-Tocopherol (mg)",
 			"Delta-Tocopherol (mg)",
-			"Vitamin K (mcg) ",
+			"Vitamin K (mcg)",
 			"Vitamin C (Ascorbic acid) (mg)",
 			"Vitamin B1 (Thiamin) (mg)",
 			"Vitamin B2 (Riboflavin) (mg)",

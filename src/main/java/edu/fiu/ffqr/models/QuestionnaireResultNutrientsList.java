@@ -47,7 +47,7 @@ public class QuestionnaireResultNutrientsList {
         "Vitamin A (Retinol) (mcg)",
         "Vitamin D (mcg)",
         "Vitamin E (mg)",
-        "Vitamin K (mcg) ",
+        "Vitamin K (mcg)",
         "Calcium (mg)",
         "Copper (mg)",
         "Iron (mg)",
