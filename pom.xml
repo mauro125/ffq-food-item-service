@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>edu.fiu</groupId>
-	<artifactId>ffq-food-entry-service</artifactId>
+	<artifactId>ffq-food-item-service</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<name>FFQ Food Item Service</name>
 	<description>Service for accessing FFQ food entries to populate questionnaire.</description>
@@ -72,7 +72,16 @@
     		<artifactId>spring-test</artifactId>
     		<version>5.1.6.RELEASE</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>2.3.4.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>5.2.9.RELEASE</version>
+		</dependency>
 
 	</dependencies>
 

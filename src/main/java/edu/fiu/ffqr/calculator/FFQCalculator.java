@@ -32,7 +32,7 @@ public class FFQCalculator {
 
 	//Khalid Alamoudi - Added total calories to the parameters and return
 	public static Result calculateTotals(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices,
-			NutrientListService nlService) {
+			NutrientListService nlService, String gender) {
 
 		// get list of valid nutrients
 		
@@ -46,7 +46,7 @@ public class FFQCalculator {
 				weeklyTotals.put(nutrients[i], 0.0);
 				dailyAverages.put(nutrients[i], 0.0);
 			}
-			return new Result(questionnaireId, userId, ageInMonths, userChoices, weeklyTotals, dailyAverages, null);
+			return new Result(questionnaireId, userId, ageInMonths, userChoices, weeklyTotals, dailyAverages, null, gender);
 		}
 
 		NutrientList tbspSugar = nlService.getWithNutrientListID("suga");
@@ -175,7 +175,7 @@ public class FFQCalculator {
 		//calculate % calories from protein, fat, and carbs
 		
 		//% calories from fat
-		double caloriesFromFatWeekly = weeklyTotals.get("Total Fat (g)") * 9;
+		double caloriesFromFatWeekly = weeklyTotals.get("Fat (g)") * 9;
 		double percentageCalFromFatWeekly = caloriesFromFatWeekly * 100 / weeklyTotals.get("Energy (kcal)");
 		weeklyTotals.put("% Calories from Fat", percentageCalFromFatWeekly);
 		dailyAverages.put("% Calories from Fat", weeklyTotals.get("% Calories from Fat"));
@@ -187,7 +187,7 @@ public class FFQCalculator {
 		dailyAverages.put("% Calories from Protein", weeklyTotals.get("% Calories from Protein"));
 				
 		//% calories from carbs
-		double caloriesFromCarbsWeekly = weeklyTotals.get("CHO (g)") * 4;
+		double caloriesFromCarbsWeekly = weeklyTotals.get("Carbohydrate (g)") * 4;
 		double percentageCalFromCarbsWeekly = caloriesFromCarbsWeekly * 100 / weeklyTotals.get("Energy (kcal)");
 		weeklyTotals.put("% Calories from Carbs", percentageCalFromCarbsWeekly);
 		dailyAverages.put("% Calories from Carbs", weeklyTotals.get("% Calories from Carbs"));
@@ -213,7 +213,7 @@ public class FFQCalculator {
 			}
 		}
 
-		Result results = new Result(questionnaireId, userId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages, null);
+		Result results = new Result(questionnaireId, userId, ageInMonths, userChoices, modWeeklyTotals, modDailyAverages, null, gender);
 		//End of added code
 		//===============================================================
 		return results;
