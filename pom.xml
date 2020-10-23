@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<jackson.databind.version>2.9.8</jackson.databind.version>
+		<jackson.databind.version>2.9.10.5</jackson.databind.version>
 		<apache.poi.version>4.0.1</apache.poi.version>
 		<apache.poi.ooxml.version>4.0.1</apache.poi.ooxml.version>
 		<powermock.version>1.6.4</powermock.version>
