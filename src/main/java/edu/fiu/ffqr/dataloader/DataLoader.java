@@ -13,6 +13,7 @@ import edu.fiu.ffqr.controller.FoodRecommendationController;
 import edu.fiu.ffqr.controller.NutrientRecommendationController;
 import edu.fiu.ffqr.models.FoodDescription;
 import edu.fiu.ffqr.models.FoodItem;
+import edu.fiu.ffqr.models.ResearchResult;
 import edu.fiu.ffqr.models.SysFoodRecommendation;
 import edu.fiu.ffqr.models.SysNutrientRecommendation;
 import edu.fiu.ffqr.repositories.SysFoodRecommendationRepository;
@@ -22,6 +23,8 @@ import edu.fiu.ffqr.repositories.NutrientListRepository;
 import edu.fiu.ffqr.service.NutrientListService;
 import edu.fiu.ffqr.controller.FoodDescriptionController;
 import edu.fiu.ffqr.repositories.FFQFoodDescriptionRepository;
+import edu.fiu.ffqr.controller.ResearchResultController;
+import edu.fiu.ffqr.repositories.FFQResearchResultRepository;
 
 @Component
 public class DataLoader {
@@ -36,12 +39,15 @@ public class DataLoader {
 	private FoodRecommendationController sysFoodItemRecomController;
 	private FoodDescriptionController foodDescriptionController;
 	private FFQFoodDescriptionRepository foodDescriptionRepository;
+        private ResearchResultController researchResultController;
+	private FFQResearchResultRepository ffqResearchResultRepository;
 	
 	public DataLoader(FFQFoodEntryRepository foodRepository, 
 			NutrientListRepository nutrientRepository, NutrientListService nutrientService, FoodItemController foodController, 
 			NutrientRecommendationController sysNutRecomController, SysNutRecommendationRepository sysNutRecomRepository,
 			SysFoodRecommendationRepository sysFoodItemRecomRepository, FoodRecommendationController sysFoodItemRecomController,
-			FoodDescriptionController foodDescriptionController, FFQFoodDescriptionRepository foodDescriptionRepository) {
+			FoodDescriptionController foodDescriptionController, FFQFoodDescriptionRepository foodDescriptionRepository,
+                        ResearchResultController researchResultController, FFQResearchResultRepository ffqResearchResultRepository) {
 		this.foodRepository = foodRepository;
 		this.nutrientRepository = nutrientRepository;
 		this.nutrientService = nutrientService;
@@ -52,6 +58,8 @@ public class DataLoader {
 		this.sysFoodItemRecomController = sysFoodItemRecomController;
 		this.foodDescriptionController = foodDescriptionController;
 		this.foodDescriptionRepository = foodDescriptionRepository;
+                this.researchResultController = researchResultController;
+		this.ffqResearchResultRepository = ffqResearchResultRepository;
 	}
 	
 	// Added by Dariana Gonzalez 10/2019
@@ -191,6 +199,41 @@ public class DataLoader {
 		System.out.println("...Loading complete!");
 		
 	}
+        
+        public void loadResearchResultSample() {
+		
+		System.out.println("<------- Loading Research Result Sample ------->");
+		
+		
+		
+		try {
+		
+			String resourceName = "ResearchResultPayload.json";		
+		
+			ClassLoader classLoader = getClass().getClassLoader();
+			InputStream inputStream = classLoader.getResourceAsStream(resourceName);
+			JSONParser jsonParser = new JSONParser();		
+			JSONArray jsonArray = (JSONArray) jsonParser
+				.parse(new InputStreamReader(inputStream));
+			ObjectMapper mapper = new ObjectMapper();
+			List<ResearchResult> ResearchResultList = new ArrayList<>();
+		
+			for (Object object : jsonArray) {
+				JSONObject jsonObject = (JSONObject) object;
+				ResearchResult item = mapper.readValue(jsonObject.toString(), ResearchResult.class);
+				ResearchResultList.add(item);
+			}
+			for(ResearchResult item : ResearchResultList) {
+				System.out.println(item.getQuestionnaireId()+ "---- Loaded!");
+				this.researchResultController.create(item);
+			}
+		} catch (Exception e) {
+			System.err.println("An error occurred while loading sample of Research Result: ");
+			e.printStackTrace();
+		}		
+	}
+	
+             
 
 	
 }
