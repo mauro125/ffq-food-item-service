@@ -18,6 +18,9 @@ public class Result {
 	
 	@JsonProperty("userId")
 	private String userId;
+        
+        @JsonProperty("userType")
+	private String userType;
 
 	@JsonProperty("patientName")
 	private String patientName;
@@ -40,11 +43,12 @@ public class Result {
 	@JsonProperty("dailyAverages")
 	Map<String, Double> dailyAverages = new HashMap<String, Double>();
 
-	public Result(String questionnaireId, String userId, int ageInMonths, ArrayList<FoodItemInput> userChoices, 
+	public Result(String questionnaireId, String userId, String userType, int ageInMonths, ArrayList<FoodItemInput> userChoices, 
 					Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages, String feedback, String gender){
 		
 		this.questionnaireId = questionnaireId;
 		this.userId = userId;
+                this.userType= userType;
 		this.patientName = "pending";
 		this.ageInMonths = ageInMonths;		
 		this.userChoices = userChoices;
@@ -76,6 +80,14 @@ public class Result {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+        
+        public String getUserType() {
+		return userId;
+	}
+
+	public void setUserType(String userType) {
+		this.userId = userType;
 	}
 
 	public String getPatientName() {
