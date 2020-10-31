@@ -48,10 +48,7 @@ public class ResearchResultController {
 		if (null == questionnaireResult) {
 			throw new IllegalArgumentException("Invalid questionnaireID");
 		}
-
-		if(data.getFeedback() != null) {
-			questionnaireResult.setFeedback(data.getFeedback());
-		}
+	
 
 		resultsService.update(questionnaireResult);
 

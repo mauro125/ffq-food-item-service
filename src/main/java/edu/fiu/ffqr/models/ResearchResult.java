@@ -20,10 +20,7 @@ public class ResearchResult {
 	private String participantUserId;
 
 	@JsonProperty("participantName")
-	private String participantName;
-
-	@JsonProperty("feedback")
-	private String feedback;
+	private String participantName;	
 	
 	@JsonProperty("ageInMonths")
 	private int ageInMonths;
@@ -55,8 +52,7 @@ public class ResearchResult {
 		this.ageInMonths = ageInMonths;		
 		this.userChoices = userChoices;
 		this.weeklyTotals = weeklyTotals;
-		this.dailyAverages = dailyAverages;
-		this.feedback = feedback;
+		this.dailyAverages = dailyAverages;		
 		this.gender = gender;
                 this.creationDate = creationDate;
 	}
@@ -131,18 +127,10 @@ public class ResearchResult {
 
 	public void setDailyAverages(Map<String, Double> dailyAverages) {
 		this.dailyAverages = dailyAverages;
-	}
-
-	public void setFeedback(String feedback) {
-		this.feedback = feedback;
-	}
-
-	public String getFeedback() {
-		return feedback;
-	}
+	}	
         
         public void setCreationDate(String creationDate) {
-		this.feedback = creationDate;
+		this.creationDate = creationDate;
 	}
 
 	public String getCreationDate() {

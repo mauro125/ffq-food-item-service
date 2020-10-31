@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FoodItemInput {
 	
-	
-
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("frequency")

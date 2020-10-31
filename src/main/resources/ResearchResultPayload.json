@@ -3,12 +3,12 @@
     "questionnaireId": "1-1600216834156",
     "participantUserId": "1",
     "participantName": "pending",
-    "feedback":"",
     "ageInMonths": 10,
     "gender":"female",
     "creationDate":"2020-10-15",
-    "userChoices": [],
-    "weeklyTotals": {},
-    "dailyAverages": {}
+    "userChoices":[],
+     "weeklyTotals":{},
+    "dailyAverages":{}
 }
+
 ]

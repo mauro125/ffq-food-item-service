@@ -41,9 +41,8 @@ public class FFQFoodEntryApplication {
 			loader.loadSysFoodItemsRecommendations();
 
 			loader.loadFoodDescription();
-                        */
-                        
-                        loader.loadResearchResultSample();
+                        */                       
+                      
 		}
 	}
 	
