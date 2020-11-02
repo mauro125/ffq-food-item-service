@@ -21,6 +21,10 @@ public class ResultsService {
 		return responsesRepository.findAll();
 	}
 
+	public List<Result> findByUserType(String userType) {
+		return responsesRepository.findByUserType(userType);
+	}
+
 	public List<Result> getResultsByUserId(String userId) {
 		return responsesRepository.findByUserId(userId);
 	}

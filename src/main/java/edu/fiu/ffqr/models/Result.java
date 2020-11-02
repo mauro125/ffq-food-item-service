@@ -19,7 +19,7 @@ public class Result {
 	@JsonProperty("userId")
 	private String userId;
         
-        @JsonProperty("userType")
+    @JsonProperty("userType")
 	private String userType;
 
 	@JsonProperty("patientName")
