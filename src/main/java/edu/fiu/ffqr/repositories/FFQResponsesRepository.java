@@ -12,5 +12,7 @@ public interface FFQResponsesRepository extends MongoRepository<Result, String> 
 	Result findByQuestionnaireId(String id);
 
 	List<Result> findByUserId(String userId);
+
+	List<Result> findByUserType(String userType);
  
 }
