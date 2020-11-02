@@ -31,8 +31,8 @@ public class ResultController {
 	}
 
 	@GetMapping("/type/{userType}")
-	public List<Result> getByUserType(@PathVariable("userType") String userType) throws JsonProcessingException {
-		List<Result> results = resultsService.getByUserType(userType);
+	public List<Result> findByUserType(@PathVariable("userType") String userType) throws JsonProcessingException {
+		List<Result> results = resultsService.findByUserType(userType);
 		return results;
 	}
 
