@@ -7,8 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Document(collection="results")
-public class Result {
+@Document(collection="research_results")
+public class ResearchResult {
 	
 	@Id
 	private ObjectId id;
@@ -16,23 +16,20 @@ public class Result {
 	@JsonProperty("questionnaireId")
 	private String questionnaireId; 
 	
-	@JsonProperty("userId")
-	private String userId;
-        
-    @JsonProperty("userType")
-	private String userType;
+	@JsonProperty("participantUserId")
+	private String participantUserId;
 
-	@JsonProperty("patientName")
-	private String patientName;
-
-	@JsonProperty("feedback")
-	private String feedback;
+	@JsonProperty("participantName")
+	private String participantName;	
 	
 	@JsonProperty("ageInMonths")
 	private int ageInMonths;
 	
 	@JsonProperty("gender")
 	private String gender;
+        
+        @JsonProperty("creationDate")
+	private String creationDate;
 
 	@JsonProperty("userChoices")
 	ArrayList<FoodItemInput> userChoices;
@@ -42,20 +39,22 @@ public class Result {
 	
 	@JsonProperty("dailyAverages")
 	Map<String, Double> dailyAverages = new HashMap<String, Double>();
+        
+        public ResearchResult(){};
 
-	public Result(String questionnaireId, String userId, String userType, int ageInMonths, ArrayList<FoodItemInput> userChoices, 
-					Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages, String feedback, String gender){
+	public ResearchResult(String questionnaireId, String participantUserId, int ageInMonths, ArrayList<FoodItemInput> userChoices, 
+					Map<String, Double> weeklyTotals, Map<String, Double> dailyAverages, 
+                                        String feedback, String gender, String creationDate){
 		
 		this.questionnaireId = questionnaireId;
-		this.userId = userId;
-                this.userType= userType;
-		this.patientName = "pending";
+		this.participantUserId = participantUserId;
+		this.participantName = "pending";
 		this.ageInMonths = ageInMonths;		
 		this.userChoices = userChoices;
 		this.weeklyTotals = weeklyTotals;
-		this.dailyAverages = dailyAverages;
-		this.feedback = feedback;
+		this.dailyAverages = dailyAverages;		
 		this.gender = gender;
+                this.creationDate = creationDate;
 	}
 	
 	public ObjectId getId() {
@@ -75,27 +74,19 @@ public class Result {
 	}
 
 	public String getUserId() {
-		return userId;
+		return participantUserId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-        
-        public String getUserType() {
-		return userId;
-	}
-
-	public void setUserType(String userType) {
-		this.userId = userType;
+	public void setUserId(String participantUserId) {
+		this.participantUserId = participantUserId;
 	}
 
 	public String getPatientName() {
-		return patientName;
+		return participantName;
 	}
 
 	public void setPatientName(String patientName) {
-		this.patientName = patientName;
+		this.participantName = patientName;
 	}
 
 	public int getAgeInMonths() {
@@ -136,13 +127,13 @@ public class Result {
 
 	public void setDailyAverages(Map<String, Double> dailyAverages) {
 		this.dailyAverages = dailyAverages;
+	}	
+        
+        public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
 	}
 
-	public void setFeedback(String feedback) {
-		this.feedback = feedback;
-	}
-
-	public String getFeedback() {
-		return feedback;
+	public String getCreationDate() {
+		return creationDate;
 	}
 }

@@ -7,37 +7,33 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import edu.fiu.ffqr.models.Result;
-import edu.fiu.ffqr.repositories.FFQResponsesRepository;
+import edu.fiu.ffqr.models.ResearchResult;
+import edu.fiu.ffqr.repositories.FFQResearchResultRepository;
 
 @Service
 @Component
-public class ResultsService {
+public class ResearchResultsService {
 
 	@Autowired
-	private FFQResponsesRepository responsesRepository;
+	private FFQResearchResultRepository responsesRepository;
 	
-	public List<Result> getAll() {
+	public List<ResearchResult> getAll() {
 		return responsesRepository.findAll();
 	}
 
-	public List<Result> findByUserType(String userType) {
-		return responsesRepository.findByUserType(userType);
-	}
-
-	public List<Result> getResultsByUserId(String userId) {
+	public List<ResearchResult> getResultsByUserId(String userId) {
 		return responsesRepository.findByUserId(userId);
 	}
 	
-	public Result create(Result results) {		
+	public ResearchResult create(ResearchResult results) {		
 		return responsesRepository.save(results);
 	}
 	
-    public Result getResultByQuestionnaireID(String questionnaireID) {
+    public ResearchResult getResultByQuestionnaireID(String questionnaireID) {
     	return responsesRepository.findByQuestionnaireId(questionnaireID);
     }
 
-	public Result update(Result updatedItem) {
+	public ResearchResult update(ResearchResult updatedItem) {
 		return responsesRepository.save(updatedItem);
 	}
 }
