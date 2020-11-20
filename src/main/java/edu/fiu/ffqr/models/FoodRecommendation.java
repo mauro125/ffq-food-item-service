@@ -13,8 +13,6 @@ public class FoodRecommendation implements Serializable {
 	
 	@JsonProperty("questionnaireId")
 	private String questionnaireId; 
-	@JsonProperty("patientName")
-	String patientName;
 	@JsonProperty("patientAge")
 	int patientAgeInMonths;	
 	@JsonProperty("foodCategoryRecList")
@@ -32,14 +30,6 @@ public class FoodRecommendation implements Serializable {
 
 	public void setQuestionnaireId(String questionnaireId) {
 		this.questionnaireId = questionnaireId;
-	}
-
-	public String getPatientName() {
-		return patientName;
-	}
-
-	public void setPatientName(String patientName) {
-		this.patientName = patientName;
 	}
 
 	public int getPatientAgeInMonths() {

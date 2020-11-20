@@ -124,7 +124,6 @@ public class NutrientRecommendationController {
 		Result result = resultsService.getResultByQuestionnaireID(questionnaireID);
 		int patientAge = result.getAgeInMonths();
 		String gender = result.getGender();
-		String patientName = result.getPatientName();
 		String energyKcal = "Energy (kcal)";
 		Map<String, Double> map = result.getDailyAverages();
 
@@ -142,7 +141,6 @@ public class NutrientRecommendationController {
 
 		NutrientRecommendation nutrientRecommendation = new NutrientRecommendation();
 		nutrientRecommendation.setPatientAgeInMonths(patientAge);
-		nutrientRecommendation.setPatientName(patientName);
 		nutrientRecommendation.setQuestionnaireId(questionnaireID);
 
 		for (int i = 0; i < SysNutrientsRecommendations.size(); i++) {
