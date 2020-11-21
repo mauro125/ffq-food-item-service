@@ -278,11 +278,12 @@ public class FoodItemController {
   public Result calculateTotals(@PathVariable("questionnaireId") String questionnaireId, 
 								@PathVariable("ageInMonths") int ageInMonths, 
 								@PathVariable("userID") String userID, 
-                                @PathVariable("userType") String userType, 
+                                @PathVariable("userType") String userType,
+								@PathVariable("date") String date,
 								@RequestBody ArrayList<FoodItemInput> userChoices,
 								@PathVariable("gender") String gender) {
 	  
-	  Result result = FFQCalculator.calculateTotals(questionnaireId, userID, userType, ageInMonths, userChoices, foodTypeService, gender);
+	  Result result = FFQCalculator.calculateTotals(questionnaireId, userID, userType, date, ageInMonths, userChoices, foodTypeService, gender);
 	  resultsService.create(result);
 	  
 	  return result;
