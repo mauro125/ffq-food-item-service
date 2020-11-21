@@ -84,7 +84,6 @@ public class FoodRecommendationController {
 		
 		foodItemRecommendation.setQuestionnaireId(questionnaireID);
 		foodItemRecommendation.setPatientAgeInMonths(infantAge);
-		foodItemRecommendation.setPatientName("pending"); // patient name still no defined in the application
 		foodItemRecommendation.setGender(gender);
 			
 		// get list of food items recommendations by age

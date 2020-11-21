@@ -22,9 +22,6 @@ public class Result {
     @JsonProperty("userType")
 	private String userType;
 
-	@JsonProperty("patientName")
-	private String patientName;
-
 	@JsonProperty("feedback")
 	private String feedback;
 	
@@ -48,8 +45,7 @@ public class Result {
 		
 		this.questionnaireId = questionnaireId;
 		this.userId = userId;
-                this.userType= userType;
-		this.patientName = "pending";
+        this.userType= userType;
 		this.ageInMonths = ageInMonths;		
 		this.userChoices = userChoices;
 		this.weeklyTotals = weeklyTotals;
@@ -88,14 +84,6 @@ public class Result {
 
 	public void setUserType(String userType) {
 		this.userId = userType;
-	}
-
-	public String getPatientName() {
-		return patientName;
-	}
-
-	public void setPatientName(String patientName) {
-		this.patientName = patientName;
 	}
 
 	public int getAgeInMonths() {

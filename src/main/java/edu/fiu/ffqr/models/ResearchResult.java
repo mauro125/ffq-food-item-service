@@ -19,8 +19,6 @@ public class ResearchResult {
 	@JsonProperty("participantUserId")
 	private String participantUserId;
 
-	@JsonProperty("participantName")
-	private String participantName;	
 	
 	@JsonProperty("ageInMonths")
 	private int ageInMonths;
@@ -48,7 +46,6 @@ public class ResearchResult {
 		
 		this.questionnaireId = questionnaireId;
 		this.participantUserId = participantUserId;
-		this.participantName = "pending";
 		this.ageInMonths = ageInMonths;		
 		this.userChoices = userChoices;
 		this.weeklyTotals = weeklyTotals;
@@ -79,14 +76,6 @@ public class ResearchResult {
 
 	public void setUserId(String participantUserId) {
 		this.participantUserId = participantUserId;
-	}
-
-	public String getPatientName() {
-		return participantName;
-	}
-
-	public void setPatientName(String patientName) {
-		this.participantName = patientName;
 	}
 
 	public int getAgeInMonths() {
