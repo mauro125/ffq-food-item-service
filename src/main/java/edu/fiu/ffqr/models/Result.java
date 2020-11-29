@@ -19,7 +19,7 @@ public class Result {
 	@JsonProperty("userId")
 	private String userId;
         
-    @JsonProperty("userType")
+  @JsonProperty("userType")
 	private String userType;
 
 	@JsonProperty("date")
@@ -51,7 +51,7 @@ public class Result {
 		
 		this.questionnaireId = questionnaireId;
 		this.userId = userId;
-        this.userType= userType;
+    this.userType= userType;
 		this.date = date;
 		this.patientName = "pending";
 		this.ageInMonths = ageInMonths;		
