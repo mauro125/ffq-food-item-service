@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.time.LocalDate; 
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -278,11 +279,14 @@ public class FoodItemController {
   public Result calculateTotals(@PathVariable("questionnaireId") String questionnaireId, 
 								@PathVariable("ageInMonths") int ageInMonths, 
 								@PathVariable("userID") String userID, 
-                                @PathVariable("userType") String userType, 
+                                @PathVariable("userType") String userType,
 								@RequestBody ArrayList<FoodItemInput> userChoices,
 								@PathVariable("gender") String gender) {
-	  
-	  Result result = FFQCalculator.calculateTotals(questionnaireId, userID, userType, ageInMonths, userChoices, foodTypeService, gender);
+
+									
+	  LocalDate locDate = java.time.LocalDate.now();
+	  String date = locDate.toString();
+	  Result result = FFQCalculator.calculateTotals(questionnaireId, userID, userType, date, ageInMonths, userChoices, foodTypeService, gender);
 	  resultsService.create(result);
 	  
 	  return result;
