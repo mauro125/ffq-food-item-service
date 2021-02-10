@@ -3,12 +3,15 @@
  */
 package edu.fiu.ffqr.service;
 
-import java.util.List;
+import edu.fiu.ffqr.models.FoodItem;
+import edu.fiu.ffqr.models.Result;
+import edu.fiu.ffqr.repositories.FFQResponsesRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import edu.fiu.ffqr.models.Result;
-import edu.fiu.ffqr.repositories.FFQResponsesRepository;
+
+import java.util.List;
 
 @Service
 @Component
@@ -33,11 +36,16 @@ public class ResultsService {
 		return responsesRepository.save(results);
 	}
 	
-    public Result getResultByQuestionnaireID(String questionnaireID) {
-    	return responsesRepository.findByQuestionnaireId(questionnaireID);
+    public Result getResultByQuestionnaireID(String questionnaireId) {
+    	return responsesRepository.findByQuestionnaireId(questionnaireId);
     }
 
 	public Result update(Result updatedItem) {
 		return responsesRepository.save(updatedItem);
+	}
+
+	public void delete(String questionnaireId) {
+		Result questionnaireResult = getResultByQuestionnaireID(questionnaireId);
+		responsesRepository.delete(questionnaireResult);
 	}
 }
