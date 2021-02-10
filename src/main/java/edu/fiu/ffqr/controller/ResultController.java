@@ -1,14 +1,12 @@
 package edu.fiu.ffqr.controller;
 
-import java.util.List;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import edu.fiu.ffqr.models.Result;
+import edu.fiu.ffqr.service.ResultsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import edu.fiu.ffqr.models.Result;
-import edu.fiu.ffqr.service.ResultsService;
+import java.util.List;
 
 /*
  * Author: Dariana Gonzalez
@@ -40,6 +38,13 @@ public class ResultController {
 	public List<Result> getResultsByUserId(@PathVariable("userID") String userId) throws JsonProcessingException {
 		List<Result> results = resultsService.getResultsByUserId(userId);
 		return results;
+	}
+
+	@DeleteMapping("/delete")
+	public String delete(@RequestParam String questionnaireId) {
+//		Result questionnaireResult = resultsService.getResultByQuestionnaireID(questionnaireID);
+		resultsService.delete(questionnaireId);
+		return "Deleted " + questionnaireId;
 	}
 
 	@PutMapping("/update")
