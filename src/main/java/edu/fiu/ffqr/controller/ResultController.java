@@ -71,4 +71,9 @@ public class ResultController {
 
 		return questionnaireResult;
 	}
+
+	@DeleteMapping("/delete")
+	public List<Result> deleteByUserId(@RequestParam("parentId") String parentId) throws JsonProcessingException {
+		return resultsService.deleteResultsByUserId(parentId);
+	}
 }

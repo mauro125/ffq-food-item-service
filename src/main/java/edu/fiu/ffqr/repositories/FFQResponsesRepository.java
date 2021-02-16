@@ -16,4 +16,7 @@ public interface FFQResponsesRepository extends MongoRepository<Result, String> 
 	List<Result> findByUserType(String userType);
 
     void delete(Result fi);
+
+	List<Result> deleteByUserId(String userId);
+ 
 }
