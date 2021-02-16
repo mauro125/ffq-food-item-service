@@ -31,6 +31,10 @@ public class ResultsService {
 	public List<Result> getResultsByUserId(String userId) {
 		return responsesRepository.findByUserId(userId);
 	}
+
+	public List<Result> deleteResultsByUserId(String userId) {
+		return responsesRepository.deleteByUserId(userId);
+	}
 	
 	public Result create(Result results) {		
 		return responsesRepository.save(results);
