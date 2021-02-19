@@ -41,10 +41,15 @@ public class ResultController {
 	}
 
 	@DeleteMapping("/delete")
-	public String delete(@RequestParam String questionnaireId) {
-//		Result questionnaireResult = resultsService.getResultByQuestionnaireID(questionnaireID);
-		resultsService.delete(questionnaireId);
-		return "Deleted " + questionnaireId;
+	public String delete(@RequestParam(required = false) String questionnaireId, @RequestParam(required = false) String parentId) {
+		if (questionnaireId != null) {
+			resultsService.delete(questionnaireId);
+			return "Deleted " + questionnaireId;
+		} else if (parentId != null) {
+			resultsService.deleteResultsByUserId(parentId);
+			return "Deleted all questionaries for parent Id " + parentId;
+		}
+		return "Did not delete anything. Provide questionnaireId or parentId";
 	}
 
 	@PutMapping("/update")
@@ -70,10 +75,5 @@ public class ResultController {
 		resultsService.update(questionnaireResult);
 
 		return questionnaireResult;
-	}
-
-	@DeleteMapping("/delete")
-	public List<Result> deleteByUserId(@RequestParam("parentId") String parentId) throws JsonProcessingException {
-		return resultsService.deleteResultsByUserId(parentId);
 	}
 }
