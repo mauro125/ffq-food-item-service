@@ -3,10 +3,8 @@
  */
 package edu.fiu.ffqr.service;
 
-import edu.fiu.ffqr.models.FoodItem;
 import edu.fiu.ffqr.models.Result;
 import edu.fiu.ffqr.repositories.FFQResponsesRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
